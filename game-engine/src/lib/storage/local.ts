@@ -9,6 +9,8 @@ const STORAGE_KEYS = {
 } as const;
 
 const listeners = new Set<() => void>();
+let recentResultCacheRaw: string | null | undefined;
+let recentResultCacheValue: ChallengeResult | null = null;
 
 function canUseStorage() {
   return typeof window !== "undefined" && typeof window.localStorage !== "undefined";
@@ -66,12 +68,22 @@ export function readRecentResult(): ChallengeResult | null {
 
   const value = window.localStorage.getItem(STORAGE_KEYS.recentResult);
   if (!value) {
+    recentResultCacheRaw = null;
+    recentResultCacheValue = null;
     return null;
   }
 
+  if (value === recentResultCacheRaw) {
+    return recentResultCacheValue;
+  }
+
   try {
-    return JSON.parse(value) as ChallengeResult;
+    recentResultCacheValue = JSON.parse(value) as ChallengeResult;
+    recentResultCacheRaw = value;
+    return recentResultCacheValue;
   } catch {
+    recentResultCacheRaw = value;
+    recentResultCacheValue = null;
     return null;
   }
 }

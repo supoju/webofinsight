@@ -17,11 +17,22 @@ export function shuffleQuestions<T>(items: T[], seed = Math.random()): T[] {
   return list;
 }
 
-export function selectChallengeQuestions(questions: Question[], count = 10): Question[] | null {
+export function deriveQuestionSeed(questions: Question[]) {
+  const source = questions.map((question) => question.id).join("|");
+  let hash = 0;
+
+  for (let index = 0; index < source.length; index += 1) {
+    hash = (hash * 31 + source.charCodeAt(index)) % 2147483647;
+  }
+
+  return ((hash || 1) % 1000000) / 1000000;
+}
+
+export function selectChallengeQuestions(questions: Question[], count = 10, seed?: number): Question[] | null {
   const scoringQuestions = questions.filter((question) => question.mode === "score");
   if (scoringQuestions.length < count) {
     return null;
   }
 
-  return shuffleQuestions(scoringQuestions).slice(0, count);
+  return shuffleQuestions(scoringQuestions, seed ?? deriveQuestionSeed(scoringQuestions)).slice(0, count);
 }

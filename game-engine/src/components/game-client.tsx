@@ -1,13 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 
 import { IllusionStage } from "@/components/illusions";
 import { CATEGORY_LABELS } from "@/lib/game/categories";
 import { buildResult, calculateQuestionScore, normalizeAnswerIndex } from "@/lib/game/scoring";
-import { selectChallengeQuestions } from "@/lib/game/selection";
+import { deriveQuestionSeed, selectChallengeQuestions } from "@/lib/game/selection";
 import { writeBestScore, writeRecentResult } from "@/lib/storage/local";
 import type { Question } from "@/types/content";
 import type { AnswerRecord } from "@/types/game";
@@ -17,83 +17,98 @@ const CHALLENGE_COUNT = 10;
 export function GameClient({ questions }: { questions: Question[] }) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
-  const selectedQuestions = useMemo(() => selectChallengeQuestions(questions, CHALLENGE_COUNT), [questions]);
+  const challengeSeed = useMemo(() => deriveQuestionSeed(questions), [questions]);
+  const selectedQuestions = useMemo(
+    () => selectChallengeQuestions(questions, CHALLENGE_COUNT, challengeSeed),
+    [questions, challengeSeed],
+  );
   const [index, setIndex] = useState(0);
-  const [remainingMs, setRemainingMs] = useState(0);
+  const [remainingMs, setRemainingMs] = useState(() => (selectedQuestions?.[0]?.timeLimitSec ?? 0) * 1000);
   const [feedback, setFeedback] = useState<string | null>(null);
   const [records, setRecords] = useState<AnswerRecord[]>([]);
   const [submittedQuestionId, setSubmittedQuestionId] = useState<string | null>(null);
   const lockRef = useRef(false);
   const startedAtRef = useRef(0);
+  const recordsRef = useRef<AnswerRecord[]>([]);
 
   const currentQuestion = selectedQuestions?.[index] ?? null;
 
-  const finishRun = useCallback((nextRecords: AnswerRecord[]) => {
-    const result = buildResult(nextRecords);
-    writeRecentResult(result);
-    writeBestScore(result.summary.scoreTotal);
-    startTransition(() => router.push("/result"));
-  }, [router, startTransition]);
+  const finishRun = useCallback(
+    (nextRecords: AnswerRecord[]) => {
+      const result = buildResult(nextRecords);
+      writeRecentResult(result);
+      writeBestScore(result.summary.scoreTotal);
+      startTransition(() => router.push("/result"));
+    },
+    [router, startTransition],
+  );
 
-  const handleAnswer = useCallback((selectedIndex: number | null, timedOut = false) => {
-    if (!currentQuestion || lockRef.current) {
-      return;
-    }
+  const handleAnswer = useCallback(
+    (selectedIndex: number | null, timedOut = false) => {
+      if (!currentQuestion || lockRef.current || !selectedQuestions) {
+        return;
+      }
 
-    lockRef.current = true;
-    setSubmittedQuestionId(currentQuestion.id);
-    setRemainingMs(0);
-    const reactionMs = Math.min(Date.now() - startedAtRef.current, currentQuestion.timeLimitSec * 1000);
-    const correctIndex = normalizeAnswerIndex(currentQuestion);
-    const wasCorrect = selectedIndex !== null && selectedIndex === correctIndex;
-    const awardedScore = calculateQuestionScore(currentQuestion, reactionMs, wasCorrect);
-    const nextRecord: AnswerRecord = {
-      questionId: currentQuestion.id,
-      title: currentQuestion.title,
-      prompt: currentQuestion.prompt,
-      category: currentQuestion.category,
-      selectedIndex,
-      selectedLabel: selectedIndex === null ? null : currentQuestion.options[selectedIndex] ?? null,
-      correctIndex,
-      correctLabel: currentQuestion.options[correctIndex] ?? String(currentQuestion.answer),
-      wasCorrect,
-      wasTimeout: timedOut,
-      reactionMs,
-      awardedScore,
-      explanation: currentQuestion.explanation,
-      uiCopy: currentQuestion.uiCopy,
-    };
+      lockRef.current = true;
+      setSubmittedQuestionId(currentQuestion.id);
+      setRemainingMs(0);
 
-    setFeedback(
-      timedOut
-        ? currentQuestion.uiCopy.timeout ?? "时间到了，错觉替你做了选择。"
-        : wasCorrect
-          ? currentQuestion.uiCopy.correct
-          : currentQuestion.uiCopy.wrong,
-    );
+      const reactionMs = Math.min(Date.now() - startedAtRef.current, currentQuestion.timeLimitSec * 1000);
+      const correctIndex = normalizeAnswerIndex(currentQuestion);
+      const wasCorrect = selectedIndex !== null && selectedIndex === correctIndex;
+      const awardedScore = calculateQuestionScore(currentQuestion, reactionMs, wasCorrect);
 
-    setRecords((previous) => {
-      const nextRecords = [...previous, nextRecord];
+      const nextRecord: AnswerRecord = {
+        questionId: currentQuestion.id,
+        title: currentQuestion.title,
+        prompt: currentQuestion.prompt,
+        category: currentQuestion.category,
+        selectedIndex,
+        selectedLabel: selectedIndex === null ? null : currentQuestion.options[selectedIndex] ?? null,
+        correctIndex,
+        correctLabel: currentQuestion.options[correctIndex] ?? String(currentQuestion.answer),
+        wasCorrect,
+        wasTimeout: timedOut,
+        reactionMs,
+        awardedScore,
+        explanation: currentQuestion.explanation,
+        uiCopy: currentQuestion.uiCopy,
+      };
+
+      setFeedback(
+        timedOut
+          ? currentQuestion.uiCopy.timeout ?? "时间到了，错觉替你做了选择。"
+          : wasCorrect
+            ? currentQuestion.uiCopy.correct
+            : currentQuestion.uiCopy.wrong,
+      );
+
+      const nextRecords = [...recordsRef.current, nextRecord];
+      recordsRef.current = nextRecords;
+      setRecords(nextRecords);
+
       window.setTimeout(() => {
-        if (index + 1 >= selectedQuestions!.length) {
+        if (index + 1 >= selectedQuestions.length) {
           finishRun(nextRecords);
           return;
         }
 
         setIndex((current) => current + 1);
       }, 650);
+    },
+    [currentQuestion, finishRun, index, selectedQuestions],
+  );
 
-      return nextRecords;
-    });
-  }, [currentQuestion, finishRun, index, selectedQuestions]);
-
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!currentQuestion) {
       return;
     }
 
     lockRef.current = false;
     startedAtRef.current = Date.now();
+    setSubmittedQuestionId(null);
+    setRemainingMs(currentQuestion.timeLimitSec * 1000);
+    setFeedback(null);
 
     const timer = window.setInterval(() => {
       const elapsed = Date.now() - startedAtRef.current;
@@ -113,9 +128,12 @@ export function GameClient({ questions }: { questions: Question[] }) {
       <div className="mx-auto flex min-h-[70vh] w-full max-w-3xl flex-col items-center justify-center gap-6 px-4 text-center">
         <h1 className="text-3xl font-semibold tracking-tight">题库尚未准备好</h1>
         <p className="max-w-xl text-slate-600 dark:text-slate-300">
-          当前 `content-lab/data/questions.json` 缺失或可计分题少于 10 道，challenge 逻辑已就绪，但不会伪造题库数据。
+          当前 `content-lab/data/questions.json` 缺失或可计分题少于 10 道，因此无法开始挑战。
         </p>
-        <Link href="/" className="rounded-full bg-slate-950 px-6 py-3 text-sm font-semibold text-white dark:bg-cyan-300 dark:text-slate-950">
+        <Link
+          href="/"
+          className="inline-flex items-center justify-center rounded-full bg-slate-950 px-6 py-3 text-sm font-semibold !text-white dark:bg-cyan-300 dark:!text-slate-950"
+        >
           返回首页
         </Link>
       </div>
@@ -123,10 +141,6 @@ export function GameClient({ questions }: { questions: Question[] }) {
   }
 
   const progressRatio = ((index + 1) / selectedQuestions.length) * 100;
-  const visibleRemainingMs =
-    currentQuestion && remainingMs === 0 && submittedQuestionId !== currentQuestion.id
-      ? currentQuestion.timeLimitSec * 1000
-      : remainingMs;
 
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8 sm:px-6 lg:px-8">
@@ -142,7 +156,7 @@ export function GameClient({ questions }: { questions: Question[] }) {
               </h1>
             </div>
             <div className="rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold dark:border-slate-700">
-              {Math.ceil(visibleRemainingMs / 1000)}s
+              {Math.ceil(remainingMs / 1000)}s
             </div>
           </div>
 
@@ -162,7 +176,7 @@ export function GameClient({ questions }: { questions: Question[] }) {
           <div className="grid gap-3">
             {currentQuestion!.options.map((option, optionIndex) => (
               <button
-                key={option}
+                key={`${currentQuestion!.id}-${optionIndex}`}
                 type="button"
                 disabled={submittedQuestionId === currentQuestion!.id || isPending}
                 onClick={() => handleAnswer(optionIndex, false)}

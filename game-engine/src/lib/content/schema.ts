@@ -21,7 +21,7 @@ export const questionSchema = z
     explanation: z.string().min(1),
     difficulty: z.enum(["easy", "medium", "hard"]),
     timeLimitSec: z.number().int().positive(),
-    score: z.number().int().positive(),
+    score: z.number().int().nonnegative(),
     uiCopy: z.object({
       intro: z.string().min(1),
       correct: z.string().min(1),
@@ -52,6 +52,14 @@ export const questionSchema = z
         code: z.ZodIssueCode.custom,
         message: "numeric answer must point to an existing option index",
         path: ["answer"],
+      });
+    }
+
+    if (question.mode === "score" && question.score <= 0) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "score questions must have a positive score",
+        path: ["score"],
       });
     }
   });
