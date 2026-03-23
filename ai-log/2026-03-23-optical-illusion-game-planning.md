@@ -92,6 +92,7 @@
 - 图形资源应优先选用 SVG / Canvas 生成器，以兼顾 Vercel Hobby 免费部署和移动端加载性能。
 - 题库应分为标准计分题与趣味分析题两层；分析题不纳入主分数，但纳入“最容易被骗类型”和人格描述。
 - 下一步应先沉淀 spec / plan / tasks，再进入 worktree 实施。
+- 已在主控仓库创建 `specs/001-optical-illusion-game/`，包含 `spec.md`、`plan.md`、`tasks.md`，供 orchestrator 审核并驱动两个 worktree 执行。
 
 ## 3. 元信息
 
