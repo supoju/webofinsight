@@ -1,14 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, useTransition } from "react";
+import { useCallback, useLayoutEffect, useMemo, useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 
 import { IllusionStage } from "@/components/illusions";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import { DisplayTitle, Eyebrow } from "@/components/ui/typography";
 import { CATEGORY_LABELS } from "@/lib/game/categories";
 import { buildResult, calculateQuestionScore, normalizeAnswerIndex } from "@/lib/game/scoring";
 import { deriveQuestionSeed, selectChallengeQuestions } from "@/lib/game/selection";
 import { writeBestScore, writeRecentResult } from "@/lib/storage/local";
+import { cn } from "@/lib/utils";
 import type { Question } from "@/types/content";
 import type { AnswerRecord } from "@/types/game";
 
@@ -132,7 +138,7 @@ export function GameClient({ questions }: { questions: Question[] }) {
         </p>
         <Link
           href="/"
-          className="inline-flex items-center justify-center rounded-full bg-slate-950 px-6 py-3 text-sm font-semibold !text-white dark:bg-cyan-300 dark:!text-slate-950"
+          className="inline-flex min-h-11 items-center justify-center rounded-full bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground shadow-[0_16px_35px_-24px_rgba(8,47,73,0.75)] transition hover:-translate-y-0.5 hover:bg-primary/90"
         >
           返回首页
         </Link>
@@ -143,61 +149,77 @@ export function GameClient({ questions }: { questions: Question[] }) {
   const progressRatio = ((index + 1) / selectedQuestions.length) * 100;
 
   return (
-    <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8 sm:px-6 lg:px-8">
-      <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-        <div className="space-y-6 rounded-[2rem] border border-slate-200/80 bg-white/85 p-6 dark:border-slate-800 dark:bg-slate-950/70">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-xs font-semibold tracking-[0.22em] text-slate-500 uppercase dark:text-slate-400">
+    <div className="mx-auto flex w-full max-w-4xl flex-col gap-3 px-4 py-5 sm:px-6 sm:py-6 lg:px-8">
+      <Card className="bg-card/95">
+        <CardContent className="space-y-4 p-4 sm:p-5">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            <div className="min-w-0">
+              <Eyebrow>
                 Question {index + 1} / {selectedQuestions.length}
-              </p>
-              <h1 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">
+              </Eyebrow>
+              <DisplayTitle className="mt-1.5 text-2xl sm:text-[2rem]">
                 {currentQuestion!.title}
-              </h1>
+              </DisplayTitle>
             </div>
-            <div className="rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold dark:border-slate-700">
-              {Math.ceil(remainingMs / 1000)}s
-            </div>
-          </div>
-
-          <div className="h-2 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800">
-            <div className="h-full rounded-full bg-cyan-500 transition-[width]" style={{ width: `${progressRatio}%` }} />
-          </div>
-
-          <div className="rounded-3xl border border-slate-200/80 bg-slate-50 p-5 dark:border-slate-800 dark:bg-slate-900/70">
-            <p className="text-sm leading-7 text-slate-700 dark:text-slate-300">{currentQuestion!.prompt}</p>
-            <div className="mt-4 flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
-              <span>{CATEGORY_LABELS[currentQuestion!.category]}</span>
-              <span>{currentQuestion!.difficulty}</span>
-              <span>{currentQuestion!.timeLimitSec}s</span>
+            <div className="inline-flex w-fit items-center gap-3 self-start rounded-full border border-border/80 bg-secondary/70 px-4 py-2 text-sm font-semibold text-secondary-foreground">
+              <span className="text-[11px] font-semibold tracking-[0.18em] uppercase text-muted-foreground">
+                Time left
+              </span>
+              <span className="text-lg text-card-foreground">{Math.ceil(remainingMs / 1000)}s</span>
             </div>
           </div>
 
-          <div className="grid gap-3">
-            {currentQuestion!.options.map((option, optionIndex) => (
-              <button
-                key={`${currentQuestion!.id}-${optionIndex}`}
-                type="button"
-                disabled={submittedQuestionId === currentQuestion!.id || isPending}
-                onClick={() => handleAnswer(optionIndex, false)}
-                className="rounded-2xl border border-slate-200 bg-white px-4 py-4 text-left text-base font-medium text-slate-900 transition hover:border-cyan-400 hover:bg-cyan-50 disabled:cursor-not-allowed disabled:opacity-70 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:hover:bg-slate-900"
-              >
-                {option}
-              </button>
-            ))}
-          </div>
+          <Progress value={progressRatio} />
+        </CardContent>
+      </Card>
 
-          <p className="rounded-2xl bg-slate-100 px-4 py-3 text-sm text-slate-700 dark:bg-slate-900 dark:text-slate-300">
-            {feedback ?? currentQuestion!.uiCopy.intro}
-          </p>
+      <section aria-label="Illusion stage">
+        <div data-testid="stage-shell" className="mx-auto w-full max-w-2xl">
+          <Card className="bg-card/92">
+            <CardContent className="p-2.5 sm:p-3">
+              <IllusionStage question={currentQuestion!} />
+            </CardContent>
+          </Card>
         </div>
+      </section>
 
-        <div className="rounded-[2rem] border border-slate-200/80 bg-white/70 p-6 dark:border-slate-800 dark:bg-slate-950/60">
-          <IllusionStage question={currentQuestion!} />
-        </div>
-      </div>
+      <section aria-label="Answer controls">
+        <Card className="bg-card/96">
+          <CardContent className="grid gap-4 p-4 sm:p-5 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:items-start">
+            <div className="min-w-0">
+              <div className="flex flex-wrap gap-2">
+                <Badge>{CATEGORY_LABELS[currentQuestion!.category]}</Badge>
+                <Badge>{currentQuestion!.difficulty}</Badge>
+                <Badge>{currentQuestion!.timeLimitSec}s</Badge>
+              </div>
+              <p className="mt-3 text-sm leading-7 text-muted-foreground sm:text-[15px]">{currentQuestion!.prompt}</p>
+              <p className="mt-3 rounded-2xl border border-border/80 bg-muted px-4 py-3 text-sm leading-6 text-muted-foreground">
+                {feedback ?? currentQuestion!.uiCopy.intro}
+              </p>
+            </div>
+            <div className="grid gap-2.5 sm:gap-3">
+              {currentQuestion!.options.map((option, optionIndex) => (
+                <Button
+                  key={`${currentQuestion!.id}-${optionIndex}`}
+                  type="button"
+                  variant="outline"
+                  size="lg"
+                  disabled={submittedQuestionId === currentQuestion!.id || isPending}
+                  onClick={() => handleAnswer(optionIndex, false)}
+                  className={cn(
+                    "justify-start rounded-2xl text-left",
+                    submittedQuestionId === currentQuestion!.id && "opacity-70",
+                  )}
+                >
+                  {option}
+                </Button>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </section>
 
-      <div className="rounded-3xl border border-slate-200/80 bg-white/80 p-4 text-sm text-slate-600 dark:border-slate-800 dark:bg-slate-950/70 dark:text-slate-300">
+      <div className="rounded-3xl border border-border/80 bg-card/85 px-4 py-3 text-sm text-muted-foreground">
         已完成 {records.length} / {selectedQuestions.length} 题。超时会自动判错并跳转下一题。
       </div>
     </div>

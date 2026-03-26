@@ -3,6 +3,10 @@
 import Link from "next/link";
 import { useMemo, useState, useSyncExternalStore } from "react";
 
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Eyebrow, HeroScore, Lead, SectionTitle } from "@/components/ui/typography";
 import { parseMarkdownBlocks } from "@/lib/content/markdown";
 import { buildShareCardSvg, buildShareText } from "@/lib/share/card";
 import { readRecentResult, subscribeStorageChanges } from "@/lib/storage/local";
@@ -181,6 +185,43 @@ function buildPatternChips(result: ChallengeResult, behaviorLabel: string, press
   return chips;
 }
 
+function ResultMetricCard({
+  eyebrow,
+  value,
+  body,
+  accent = false,
+}: {
+  eyebrow: string;
+  value: string;
+  body: string;
+  accent?: boolean;
+}) {
+  return (
+    <Card className={accent ? "bg-primary text-primary-foreground dark:text-slate-950" : "bg-card/88"}>
+      <CardContent className="p-5">
+        <Eyebrow className={accent ? "text-primary-foreground/70 dark:text-slate-800" : undefined}>{eyebrow}</Eyebrow>
+        <p className={accent ? "mt-3 text-3xl font-semibold tracking-tight" : "mt-3 text-4xl font-semibold tracking-tight text-card-foreground"}>
+          {value}
+        </p>
+        <p className={accent ? "mt-3 text-sm leading-7 text-primary-foreground/85 dark:text-slate-900" : "mt-2 text-sm text-muted-foreground"}>
+          {body}
+        </p>
+      </CardContent>
+    </Card>
+  );
+}
+
+function ReviewField({ label, value }: { label: string; value: string }) {
+  return (
+    <Card className="rounded-2xl bg-card dark:bg-slate-950">
+      <CardContent className="px-4 py-4 text-sm">
+        <Eyebrow className="tracking-[0.18em]">{label}</Eyebrow>
+        <p className="mt-2 font-semibold text-card-foreground dark:text-white">{value}</p>
+      </CardContent>
+    </Card>
+  );
+}
+
 export function ResultClient({
   resultsCopy,
   shareCopy,
@@ -230,12 +271,12 @@ export function ResultClient({
     return (
       <div className="mx-auto flex min-h-[70vh] w-full max-w-3xl flex-col items-center justify-center gap-6 px-4 text-center">
         <h1 className="text-3xl font-semibold tracking-tight">还没有最近成绩</h1>
-        <p className="max-w-xl text-slate-600 dark:text-slate-300">
+        <p className="max-w-xl text-muted-foreground">
           结果页依赖浏览器 localStorage 中的最近一次挑战结果。先去完成一局挑战。
         </p>
         <Link
           href="/"
-          className="inline-flex items-center justify-center rounded-full bg-slate-950 px-6 py-3 text-sm font-semibold !text-white dark:bg-cyan-300 dark:!text-slate-950"
+          className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-[0_18px_35px_-22px_rgba(8,47,73,0.75)] transition hover:-translate-y-0.5 hover:bg-primary/90"
         >
           返回首页
         </Link>
@@ -276,90 +317,90 @@ export function ResultClient({
 
   return (
     <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-4 py-8 sm:px-6 lg:px-8">
-      <section className="overflow-hidden rounded-[2.4rem] border border-slate-200/80 bg-[radial-gradient(circle_at_top_left,_rgba(148,163,184,0.18),_transparent_32%),linear-gradient(145deg,_rgba(255,255,255,0.98),_rgba(241,245,249,0.92))] shadow-[0_40px_120px_-55px_rgba(15,23,42,0.55)] dark:border-slate-800 dark:bg-[radial-gradient(circle_at_top_left,_rgba(34,211,238,0.12),_transparent_28%),linear-gradient(145deg,_rgba(2,6,23,0.98),_rgba(15,23,42,0.92))]">
+      <section
+        data-testid="result-hero"
+        className="overflow-hidden rounded-[2.4rem] border border-border/80 bg-[radial-gradient(circle_at_top_left,_rgba(34,211,238,0.14),_transparent_32%),linear-gradient(145deg,_rgba(255,255,255,0.98),_rgba(241,245,249,0.92))] shadow-[0_40px_120px_-55px_rgba(15,23,42,0.55)] dark:bg-[radial-gradient(circle_at_top_left,_rgba(34,211,238,0.12),_transparent_28%),linear-gradient(145deg,_rgba(2,6,23,0.98),_rgba(15,23,42,0.92))]"
+      >
         <div className="grid gap-0 lg:grid-cols-[1.2fr_0.8fr]">
           <div className="relative overflow-hidden p-8 sm:p-10 lg:p-12">
             <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,_transparent_0%,_transparent_48%,_rgba(15,23,42,0.04)_48.5%,_transparent_49%,_transparent_100%)] dark:bg-[linear-gradient(120deg,_transparent_0%,_transparent_48%,_rgba(148,163,184,0.08)_48.5%,_transparent_49%,_transparent_100%)]" />
             <div className="relative z-10">
-              <p className="text-xs font-semibold tracking-[0.32em] text-slate-500 uppercase dark:text-slate-400">
-                Optical Verdict
-              </p>
+              <Eyebrow className="tracking-[0.32em]">Optical Verdict</Eyebrow>
               <div className="mt-6 flex flex-wrap items-end gap-4">
-                <h1 className="text-[4.5rem] leading-none font-semibold tracking-[-0.06em] text-slate-950 sm:text-[6rem] dark:text-white">
+                <HeroScore>
                   {result.summary.scoreTotal}
-                </h1>
+                </HeroScore>
                 <div className="pb-2">
-                  <p className="text-xs font-semibold tracking-[0.26em] text-slate-500 uppercase dark:text-slate-400">
-                    Tier
-                  </p>
+                  <Eyebrow className="tracking-[0.26em]">Tier</Eyebrow>
                   <p className="mt-2 text-2xl font-semibold tracking-tight text-slate-900 dark:text-white">
                     {result.summary.tier.title}
                   </p>
                 </div>
               </div>
 
-              <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-700 dark:text-slate-300">
+              <Lead className="mt-5 max-w-2xl text-slate-700 dark:text-slate-300">
                 {titleLead}
-              </p>
+              </Lead>
 
               <div className="mt-8 grid gap-4 md:grid-cols-[0.8fr_1.2fr]">
-                <div className="rounded-[1.8rem] border border-slate-200/70 bg-white/80 p-5 dark:border-slate-800 dark:bg-slate-950/45">
-                  <p className="text-xs font-semibold tracking-[0.2em] text-slate-500 uppercase dark:text-slate-400">
-                    行为标签
-                  </p>
+                <Card className="bg-card/88 dark:bg-slate-950/45">
+                  <CardContent className="p-5">
+                  <Eyebrow className="tracking-[0.2em]">行为标签</Eyebrow>
                   <p className="mt-3 text-2xl font-semibold tracking-tight text-slate-950 dark:text-white">
                     {behavior.label}
                   </p>
                   <p className="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">
                     {behavior.note}
                   </p>
-                </div>
+                  </CardContent>
+                </Card>
 
-                <div className="rounded-[1.8rem] border border-slate-200/70 bg-slate-950 p-5 text-slate-100 dark:border-slate-700 dark:bg-white">
-                  <p className="text-xs font-semibold tracking-[0.2em] text-slate-400 uppercase dark:text-slate-500">
-                    心理读数
-                  </p>
+                <Card className="bg-slate-950 text-slate-100 dark:bg-white dark:text-slate-950">
+                  <CardContent className="p-5">
+                  <Eyebrow className="tracking-[0.2em] text-slate-400 dark:text-slate-500">心理读数</Eyebrow>
                   <p className="mt-3 text-xl font-semibold tracking-tight text-white dark:text-slate-950">
                     {pressureTag}
                   </p>
                   <p className="mt-3 text-sm leading-7 text-slate-300 dark:text-slate-600">
                     {scoreGuide}
                   </p>
-                </div>
+                  </CardContent>
+                </Card>
               </div>
 
               <div className="mt-6 flex flex-wrap gap-2">
                 {chips.map((chip) => (
-                  <span
-                    key={chip}
-                    className="rounded-full border border-slate-200 bg-white/75 px-4 py-2 text-[11px] font-semibold tracking-[0.22em] text-slate-600 uppercase dark:border-slate-700 dark:bg-slate-950/55 dark:text-slate-300"
-                  >
+                  <Badge key={chip} className="bg-card/85 text-muted-foreground dark:bg-card/65">
                     {chip}
-                  </span>
+                  </Badge>
                 ))}
               </div>
 
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
                   href="/play"
-                  className="inline-flex min-w-[9rem] items-center justify-center rounded-full bg-slate-950 px-6 py-3 text-sm font-semibold !text-white shadow-[0_18px_35px_-22px_rgba(15,23,42,0.9)] transition hover:bg-slate-800 dark:bg-cyan-300 dark:!text-slate-950 dark:hover:bg-cyan-200"
+                  className="inline-flex min-w-[9rem] items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-[0_18px_35px_-22px_rgba(8,47,73,0.75)] transition hover:-translate-y-0.5 hover:bg-primary/90"
                 >
                   {replayLabel}
                 </Link>
-                <button
+                <Button
                   type="button"
                   onClick={copyShare}
-                  className="rounded-full border border-slate-300 bg-white/85 px-6 py-3 text-sm font-semibold text-slate-900 transition hover:border-cyan-400 hover:bg-cyan-50 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:hover:bg-slate-900"
+                  variant="outline"
+                  size="pill"
+                  className="rounded-full bg-card/85 px-6"
                 >
                   复制分享文案
-                </button>
-                <button
+                </Button>
+                <Button
                   type="button"
                   onClick={downloadShareCard}
-                  className="rounded-full border border-slate-300 bg-white/85 px-6 py-3 text-sm font-semibold text-slate-900 transition hover:border-cyan-400 hover:bg-cyan-50 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:hover:bg-slate-900"
+                  variant="outline"
+                  size="pill"
+                  className="rounded-full bg-card/85 px-6"
                 >
                   下载分享卡片
-                </button>
+                </Button>
               </div>
 
               {shareState ? <p className="mt-4 text-sm text-cyan-700 dark:text-cyan-300">{shareState}</p> : null}
@@ -368,88 +409,57 @@ export function ResultClient({
 
           <div className="border-t border-slate-200/70 bg-[linear-gradient(180deg,_rgba(15,23,42,0.03),_rgba(15,23,42,0.07))] p-6 sm:p-8 lg:border-t-0 lg:border-l dark:border-slate-800 dark:bg-[linear-gradient(180deg,_rgba(148,163,184,0.06),_rgba(15,23,42,0.16))]">
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
-              <div className="rounded-[1.7rem] border border-slate-200/70 bg-white/80 p-5 dark:border-slate-800 dark:bg-slate-950/60">
-                <p className="text-xs font-semibold tracking-[0.2em] text-slate-500 uppercase dark:text-slate-400">
-                  命中率
-                </p>
-                <p className="mt-3 text-4xl font-semibold tracking-tight text-slate-950 dark:text-white">
-                  {accuracy}
-                </p>
-                <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">10 题内你有多频繁压住第一眼直觉</p>
-              </div>
-
-              <div className="rounded-[1.7rem] border border-slate-200/70 bg-white/80 p-5 dark:border-slate-800 dark:bg-slate-950/60">
-                <p className="text-xs font-semibold tracking-[0.2em] text-slate-500 uppercase dark:text-slate-400">
-                  平均反应
-                </p>
-                <p className="mt-3 text-4xl font-semibold tracking-tight text-slate-950 dark:text-white">
-                  {result.summary.averageReactionMs}ms
-                </p>
-                <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">越低代表你越快完成自我校准</p>
-              </div>
-
-              <div className="rounded-[1.7rem] border border-slate-200/70 bg-slate-950 p-5 text-white dark:border-slate-700 dark:bg-cyan-300 dark:text-slate-950">
-                <p className="text-xs font-semibold tracking-[0.2em] text-slate-400 uppercase dark:text-slate-700">
-                  最容易被骗
-                </p>
-                <p className="mt-3 text-3xl font-semibold tracking-tight">
-                  {result.summary.weakestCategoryLabel}
-                </p>
-                <p className="mt-3 text-sm leading-7 text-slate-300 dark:text-slate-800">{weaknessInsight}</p>
-              </div>
-
-              <div className="rounded-[1.7rem] border border-slate-200/70 bg-white/80 p-5 dark:border-slate-800 dark:bg-slate-950/60">
-                <p className="text-xs font-semibold tracking-[0.2em] text-slate-500 uppercase dark:text-slate-400">
-                  人格分析
-                </p>
-                <p className="mt-3 text-2xl font-semibold tracking-tight text-slate-950 dark:text-white">
-                  {result.summary.personaTitle}
-                </p>
-                <p className="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">{tierTone}</p>
-              </div>
+              <ResultMetricCard eyebrow="命中率" value={accuracy} body="10 题内你有多频繁压住第一眼直觉" />
+              <ResultMetricCard
+                eyebrow="平均反应"
+                value={`${result.summary.averageReactionMs}ms`}
+                body="越低代表你越快完成自我校准"
+              />
+              <ResultMetricCard eyebrow="最容易被骗" value={result.summary.weakestCategoryLabel} body={weaknessInsight} accent />
+              <ResultMetricCard eyebrow="人格分析" value={result.summary.personaTitle} body={tierTone} />
             </div>
           </div>
         </div>
       </section>
 
       <section className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-        <div className="rounded-[2rem] border border-slate-200/80 bg-white/85 p-8 shadow-[0_24px_60px_-45px_rgba(15,23,42,0.5)] dark:border-slate-800 dark:bg-slate-950/70">
+        <Card className="bg-card/92">
+          <CardContent className="p-8">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="text-xs font-semibold tracking-[0.22em] text-slate-500 uppercase dark:text-slate-400">
-                反转诊断
-              </p>
-              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">
+              <Eyebrow>反转诊断</Eyebrow>
+              <SectionTitle className="mt-3">
                 {result.summary.personaTitle}
-              </h2>
+              </SectionTitle>
             </div>
-            <div className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-semibold tracking-[0.2em] text-slate-600 uppercase dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300">
+            <div className="rounded-full border border-border/80 bg-muted px-4 py-2 text-xs font-semibold tracking-[0.2em] text-muted-foreground uppercase">
               {formatDateTime(result.completedAt)}
             </div>
           </div>
 
-          <p className="mt-5 text-sm leading-8 text-slate-700 dark:text-slate-300">{result.summary.personaSummary}</p>
+          <p className="mt-5 text-sm leading-8 text-muted-foreground">{result.summary.personaSummary}</p>
 
           <div className="mt-6 grid gap-4 md:grid-cols-2">
-            <div className="rounded-[1.7rem] bg-slate-100 p-5 dark:bg-slate-900">
-              <p className="text-xs font-semibold tracking-[0.2em] text-slate-500 uppercase dark:text-slate-400">
+            <div className="rounded-[1.7rem] bg-muted p-5">
+              <p className="text-xs font-semibold tracking-[0.2em] text-muted-foreground uppercase">
                 为什么会翻车
               </p>
-              <p className="mt-3 text-sm leading-7 text-slate-700 dark:text-slate-300">{weaknessInsight}</p>
+              <p className="mt-3 text-sm leading-7 text-muted-foreground">{weaknessInsight}</p>
             </div>
-            <div className="rounded-[1.7rem] bg-slate-100 p-5 dark:bg-slate-900">
-              <p className="text-xs font-semibold tracking-[0.2em] text-slate-500 uppercase dark:text-slate-400">
+            <div className="rounded-[1.7rem] bg-muted p-5">
+              <p className="text-xs font-semibold tracking-[0.2em] text-muted-foreground uppercase">
                 结果提示
               </p>
-              <p className="mt-3 text-sm leading-7 text-slate-700 dark:text-slate-300">{reviewTone}</p>
+              <p className="mt-3 text-sm leading-7 text-muted-foreground">{reviewTone}</p>
             </div>
           </div>
-        </div>
+          </CardContent>
+        </Card>
 
-        <div className="overflow-hidden rounded-[2rem] border border-slate-200/80 bg-slate-950 text-slate-100 shadow-[0_28px_70px_-45px_rgba(15,23,42,0.8)] dark:border-slate-700">
+        <div className="overflow-hidden rounded-[2rem] border border-border/80 bg-slate-950 text-slate-100 shadow-[0_28px_70px_-45px_rgba(15,23,42,0.8)] dark:bg-[linear-gradient(180deg,_rgba(8,47,73,0.9),_rgba(2,6,23,0.96))]">
           <div className="border-b border-white/10 px-8 py-6">
-            <p className="text-xs font-semibold tracking-[0.24em] text-slate-400 uppercase">Share Capsule</p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white">把这次翻车，变成一张能发出去的战报</h2>
+            <Eyebrow className="tracking-[0.24em] text-slate-400">Share Capsule</Eyebrow>
+            <SectionTitle className="mt-3 text-white">把这次翻车，变成一张能发出去的战报</SectionTitle>
           </div>
 
           <div className="grid gap-0 lg:grid-cols-[1.1fr_0.9fr]">
@@ -465,12 +475,12 @@ export function ResultClient({
               <p className="text-xs font-semibold tracking-[0.2em] text-slate-400 uppercase">传播挂钩</p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {shareTags.map((tag) => (
-                  <span
+                  <Badge
                     key={tag}
-                    className="rounded-full border border-white/12 bg-white/8 px-3 py-2 text-[11px] font-semibold tracking-[0.18em] text-slate-200 uppercase"
+                    className="border-white/12 bg-white/8 text-slate-200 dark:border-white/12 dark:bg-white/8 dark:text-slate-200"
                   >
                     {tag}
-                  </span>
+                  </Badge>
                 ))}
               </div>
               <div className="mt-6 rounded-[1.7rem] bg-[linear-gradient(135deg,_rgba(34,211,238,0.22),_rgba(15,23,42,0.2))] p-5">
@@ -484,18 +494,17 @@ export function ResultClient({
         </div>
       </section>
 
-      <section className="rounded-[2rem] border border-slate-200/80 bg-white/85 p-8 shadow-[0_24px_60px_-45px_rgba(15,23,42,0.5)] dark:border-slate-800 dark:bg-slate-950/70">
+      <Card className="bg-card/92">
+        <CardContent className="p-8">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-xs font-semibold tracking-[0.22em] text-slate-500 uppercase dark:text-slate-400">
-              错题回顾
-            </p>
-            <h2 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">
+            <Eyebrow>错题回顾</Eyebrow>
+            <SectionTitle className="mt-2">
               {reviewTitle}
-            </h2>
-            <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-600 dark:text-slate-300">{reviewLead}</p>
+            </SectionTitle>
+            <p className="mt-3 max-w-3xl text-sm leading-7 text-muted-foreground">{reviewLead}</p>
           </div>
-          <div className="rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white dark:bg-cyan-300 dark:text-slate-950">
+          <div className="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground">
             {wrongAnswers.length} 道错题
           </div>
         </div>
@@ -509,44 +518,33 @@ export function ResultClient({
             wrongAnswers.map((answer, index) => (
               <article
                 key={answer.questionId}
-                className="grid gap-4 rounded-[1.8rem] border border-slate-200/80 bg-[linear-gradient(180deg,_rgba(248,250,252,0.95),_rgba(241,245,249,0.75))] p-5 md:grid-cols-[auto_1fr] dark:border-slate-800 dark:bg-[linear-gradient(180deg,_rgba(15,23,42,0.78),_rgba(2,6,23,0.92))]"
+                className="grid gap-4 rounded-[1.8rem] border border-border/80 bg-[linear-gradient(180deg,_rgba(248,250,252,0.95),_rgba(241,245,249,0.75))] p-5 md:grid-cols-[auto_1fr] dark:bg-[linear-gradient(180deg,_rgba(15,23,42,0.78),_rgba(2,6,23,0.92))]"
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-950 text-sm font-semibold tracking-[0.2em] text-white dark:bg-cyan-300 dark:text-slate-950">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary text-sm font-semibold tracking-[0.2em] text-primary-foreground">
                   {String(index + 1).padStart(2, "0")}
                 </div>
                 <div>
                   <div className="flex flex-wrap items-start justify-between gap-3">
-                    <h3 className="text-xl font-semibold tracking-tight text-slate-950 dark:text-white">
+                    <h3 className="text-xl font-semibold tracking-tight text-card-foreground dark:text-white">
                       {answer.title}
                     </h3>
-                    <div className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold tracking-[0.16em] text-slate-600 uppercase dark:border-slate-700 dark:bg-slate-950 dark:text-slate-300">
+                    <div className="rounded-full border border-border/80 bg-card px-3 py-1 text-xs font-semibold tracking-[0.16em] text-muted-foreground uppercase">
                       {answer.wasTimeout ? "超时失守" : "判断偏航"}
                     </div>
                   </div>
-                  <p className="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">{answer.prompt}</p>
+                  <p className="mt-3 text-sm leading-7 text-muted-foreground dark:text-slate-300">{answer.prompt}</p>
                   <div className="mt-4 grid gap-3 md:grid-cols-2">
-                    <div className="rounded-2xl bg-white px-4 py-4 text-sm dark:bg-slate-950">
-                      <p className="text-xs font-semibold tracking-[0.18em] text-slate-500 uppercase dark:text-slate-400">
-                        你的答案
-                      </p>
-                      <p className="mt-2 font-semibold text-slate-950 dark:text-white">
-                        {answer.wasTimeout ? "超时" : answer.selectedLabel ?? "未作答"}
-                      </p>
-                    </div>
-                    <div className="rounded-2xl bg-white px-4 py-4 text-sm dark:bg-slate-950">
-                      <p className="text-xs font-semibold tracking-[0.18em] text-slate-500 uppercase dark:text-slate-400">
-                        正确答案
-                      </p>
-                      <p className="mt-2 font-semibold text-slate-950 dark:text-white">{answer.correctLabel}</p>
-                    </div>
+                    <ReviewField label="你的答案" value={answer.wasTimeout ? "超时" : answer.selectedLabel ?? "未作答"} />
+                    <ReviewField label="正确答案" value={answer.correctLabel} />
                   </div>
-                  <p className="mt-4 text-sm leading-7 text-slate-700 dark:text-slate-300">{answer.explanation}</p>
+                  <p className="mt-4 text-sm leading-7 text-muted-foreground dark:text-slate-300">{answer.explanation}</p>
                 </div>
               </article>
             ))
           )}
         </div>
-      </section>
+        </CardContent>
+      </Card>
     </div>
   );
 }

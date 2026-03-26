@@ -1,3 +1,5 @@
+import { Card, CardContent } from "@/components/ui/card";
+
 export function MetricCard({
   label,
   value,
@@ -8,14 +10,16 @@ export function MetricCard({
   hint?: string;
 }) {
   return (
-    <div className="rounded-3xl border border-slate-200/80 bg-white/80 p-5 shadow-sm dark:border-slate-800 dark:bg-slate-950/70">
-      <p className="text-xs font-semibold tracking-[0.22em] text-slate-500 uppercase dark:text-slate-400">
-        {label}
-      </p>
-      <p className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 dark:text-slate-50">
-        {value}
-      </p>
-      {hint ? <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">{hint}</p> : null}
-    </div>
+    <Card className="bg-card/88">
+      <CardContent className="p-5">
+        <p className="text-xs font-semibold tracking-[0.22em] text-muted-foreground uppercase">
+          {label}
+        </p>
+        <p className="mt-3 text-3xl font-semibold tracking-tight text-card-foreground">
+          {value}
+        </p>
+        {hint ? <p className="mt-2 text-sm text-muted-foreground">{hint}</p> : null}
+      </CardContent>
+    </Card>
   );
 }

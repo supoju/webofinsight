@@ -11,7 +11,7 @@ export function StageFrame({
         <span>{label}</span>
         <span>look twice</span>
       </div>
-      <div className="aspect-[4/3] w-full overflow-hidden rounded-[1.5rem] bg-white/70 p-3 dark:bg-slate-950/70">
+      <div className="aspect-[4/3] w-full overflow-hidden rounded-[1.5rem] bg-white/70 p-3 dark:bg-slate-950/70 lg:aspect-[16/10]">
         {children}
       </div>
     </div>
