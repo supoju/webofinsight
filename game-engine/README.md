@@ -59,33 +59,50 @@ npm run build
 - Light/dark theme toggle
 - Frontend-generated SVG share card download
 
-## Vercel Hobby Deployment
+## Deployment
 
-### Preferred: Deploy From Repository Root
-
-Use repository root as the deployment context so `content-lab/` is present at build time.
+### Vercel
 
 Recommended Vercel settings:
 
-1. Root Directory: repository root
-2. Install Command: `npm install --prefix game-engine`
-3. Build Command: `npm run build --prefix game-engine`
-4. Output handling: Next.js default
+1. Framework Preset: `Next.js`
+2. Root Directory: `game-engine`
+3. Install Command: `npm install`
+4. Build Command: `npm run build`
+5. Output handling: Next.js default
 
-In this mode, engine resolves `content-lab/` directly from the repository root without copying files.
+`npm run build` already triggers `prebuild`, which copies `../content-lab` into `game-engine/.generated/content-lab/` when the sibling directory is available.
 
-### Fallback: Deploy With `game-engine` As Root Directory
+If your Vercel project blocks access to `../content-lab`, enable source files outside Root Directory in Vercel project settings.
 
-If Vercel must use `game-engine/` as the root directory, the build now includes a prebuild sync step:
+### Cloudflare Workers
+
+Use Cloudflare Workers for this project. Do not use Cloudflare Pages static export unless the app is explicitly converted to `output: "export"`.
+
+Required files:
+
+- `open-next.config.ts`
+- `wrangler.jsonc`
+
+Available commands:
 
 ```bash
-npm run content:sync
-npm run build
+npm run cf:build
+npm run preview
+npm run deploy
 ```
 
-`npm run build` already triggers `prebuild`, which copies `../content-lab` into `game-engine/.generated/content-lab/`.
+What they do:
 
-This keeps the worktree boundary intact while making production builds deterministic inside the engine root.
+- `npm run cf:build` syncs `content-lab/` and builds the OpenNext Cloudflare worker output into `.open-next/`
+- `npm run preview` builds and starts local Wrangler preview
+- `npm run deploy` builds and deploys to Cloudflare Workers
+
+Before the first deploy, authenticate Wrangler:
+
+```bash
+npx wrangler login
+```
 
 ## Contract Note
 

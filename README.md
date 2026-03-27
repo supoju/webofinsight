@@ -40,7 +40,9 @@ npm --prefix game-engine run build
 
 The production build pulls authored content from `content-lab/` into `game-engine/.generated/content-lab` via `npm run content:sync`.
 
-## Vercel Deployment
+## Deployment
+
+### Vercel
 
 Deploy the `game-engine` app as the Vercel project root.
 
@@ -52,4 +54,19 @@ Recommended settings:
 - Build Command: `npm run build`
 - Output Directory: leave default for Next.js
 
-No backend services or secret configuration are required for the current frontend-only MVP.
+If the build cannot read sibling `content-lab/`, enable Vercel support for source files outside the root directory. This is needed because `game-engine` synchronizes authored content from `../content-lab` during `prebuild`.
+
+### Cloudflare
+
+Deploy the same `game-engine` app to Cloudflare Workers, not Cloudflare Pages static export.
+
+Recommended settings:
+
+- Project root: `game-engine`
+- Install command: `npm install`
+- Preview command: `npm run preview`
+- Deploy command: `npm run deploy`
+
+Cloudflare support is implemented through OpenNext and Wrangler in `game-engine/open-next.config.ts` and `game-engine/wrangler.jsonc`.
+
+Direct console values are listed in `docs/deployment-console-checklist.md`.
