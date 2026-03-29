@@ -29,6 +29,7 @@ export default function RootLayout({
   return (
     <html lang="zh-CN" suppressHydrationWarning>
       <body
+        suppressHydrationWarning
         className={`${bodyFont.variable} ${displayFont.variable} min-h-screen bg-[linear-gradient(180deg,#f8fafc,#dbeafe_55%,#f8fafc)] text-slate-950 antialiased dark:bg-[linear-gradient(180deg,#020617,#0f172a_55%,#020617)] dark:text-slate-100`}
       >
         <ThemeProvider>{children}</ThemeProvider>

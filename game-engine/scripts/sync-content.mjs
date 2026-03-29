@@ -1,4 +1,4 @@
-import { cp, mkdir, rm, access } from "node:fs/promises";
+import { cp, mkdir, rm, access, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -7,6 +7,7 @@ const __dirname = path.dirname(__filename);
 const engineRoot = path.resolve(__dirname, "..");
 const repoRoot = path.resolve(engineRoot, "..");
 const targetRoot = path.join(engineRoot, ".generated", "content-lab");
+const generatedModulePath = path.join(engineRoot, "src", "lib", "content", "generated.ts");
 
 async function exists(target) {
   try {
@@ -39,7 +40,50 @@ async function main() {
   await mkdir(path.dirname(targetRoot), { recursive: true });
   await rm(targetRoot, { recursive: true, force: true });
   await cp(sourceRoot, targetRoot, { recursive: true });
+  await writeGeneratedModule(targetRoot);
   console.log(`[content:sync] synced content-lab -> ${targetRoot}`);
+}
+
+async function writeGeneratedModule(sourceRoot) {
+  const [questionsRaw, home, results, share, pacing] = await Promise.all([
+    readFile(path.join(sourceRoot, "data", "questions.json"), "utf8"),
+    readFile(path.join(sourceRoot, "copy", "home.md"), "utf8"),
+    readFile(path.join(sourceRoot, "copy", "results.md"), "utf8"),
+    readFile(path.join(sourceRoot, "copy", "share.md"), "utf8"),
+    readFile(path.join(sourceRoot, "pacing", "sequence.md"), "utf8"),
+  ]);
+
+  const questions = JSON.parse(questionsRaw);
+  const relativeSourceRoot = path
+    .relative(engineRoot, sourceRoot)
+    .split(path.sep)
+    .join("/");
+
+  const moduleSource = `import type { MarkdownCopyKey, Question } from "@/types/content";
+
+type GeneratedContent = {
+  questions: Question[] | null;
+  copy: Record<MarkdownCopyKey, string | null>;
+  sourceRoot: string | null;
+};
+
+export const GENERATED_CONTENT: GeneratedContent = ${JSON.stringify(
+    {
+      questions,
+      copy: {
+        home,
+        results,
+        share,
+        pacing,
+      },
+      sourceRoot: relativeSourceRoot,
+    },
+    null,
+    2,
+  )};
+`;
+
+  await writeFile(generatedModulePath, moduleSource, "utf8");
 }
 
 main().catch((error) => {
