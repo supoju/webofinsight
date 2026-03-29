@@ -1,66 +1,66 @@
-# Deployment Console Checklist
+# 部署控制台参数清单
 
 ## Vercel
 
-### Import Settings
+### 导入设置
 
-- Repository: `supoju/webofinsight`
-- Framework Preset: `Next.js`
-- Root Directory: `game-engine`
+- 仓库：`supoju/webofinsight`
+- 框架预设：`Next.js`
+- 根目录：`game-engine`
 
-### Build And Output Settings
+### 构建与输出设置
 
-- Install Command: `npm install`
-- Build Command: `npm run build`
-- Output Directory: leave empty and use Next.js default
+- 安装命令：`npm install`
+- 构建命令：`npm run build`
+- 输出目录：留空，使用 Next.js 默认值
 
-### Node / Environment Notes
+### Node / 环境说明
 
-- No required production secrets for the current MVP
-- If build cannot access sibling `content-lab/`, enable source files outside the Root Directory in Vercel project settings
+- 当前 MVP 不需要额外的生产环境密钥
+- 如果构建时无法读取同级 `content-lab/`，需要在 Vercel 项目设置中开启“允许 Root Directory 之外的源码文件”
 
-### Domain / Runtime Notes
+### 分支 / 路由说明
 
-- Production branch: `main`
-- Default route should serve `/`
+- 生产分支：`main`
+- 默认首页路由：`/`
 
 ## Cloudflare Workers
 
-### Repository / Root Settings
+### 仓库 / 根目录设置
 
-- Repository: `supoju/webofinsight`
-- Root Directory: `game-engine`
+- 仓库：`supoju/webofinsight`
+- 根目录：`game-engine`
 
-### Build Settings
+### 构建设置
 
-- Install Command: `npm install`
-- Build Command: `npm run cf:build`
+- 安装命令：`npm install`
+- 构建命令：`npm run cf:build`
 
-### Deploy Settings
+### 部署设置
 
-- Deploy Command: `npm run deploy`
+- 部署命令：`npm run deploy`
 
-### Wrangler Config
+### Wrangler 配置
 
-- Config file: `game-engine/wrangler.jsonc`
-- Worker Name: `webofinsight-game-engine`
-- Main Entry: `.open-next/worker.js`
-- Assets Directory: `.open-next/assets`
-- Compatibility Date: `2026-03-27`
-- Compatibility Flags:
+- 配置文件：`game-engine/wrangler.jsonc`
+- Worker 名称：`webofinsight-game-engine`
+- 主入口：`.open-next/worker.js`
+- 静态资源目录：`.open-next/assets`
+- Compatibility Date：`2026-03-27`
+- Compatibility Flags：
   - `nodejs_compat`
   - `global_fetch_strictly_public`
 
-### Important Choice
+### 重要选择
 
-- Use `Cloudflare Workers`
-- Do not use `Cloudflare Pages` static export for the current project
+- 使用：`Cloudflare Workers`
+- 不要使用：`Cloudflare Pages` 静态导出
 
-### First-Time Auth
+### 首次认证
 
-- Run locally before first deploy: `npx wrangler login`
+- 首次部署前先在本地执行：`npx wrangler login`
 
-## Local Verification Commands
+## 本地验证命令
 
 ```bash
 npm --prefix game-engine run build

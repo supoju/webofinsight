@@ -89,28 +89,30 @@ The engine loads content from fixed JSON and Markdown interface files without in
 15. The repository must store authored copy and pacing notes in Markdown files under `content-lab/`.
 16. Each question entry must include:
     `id`, `category`, `mode`, `title`, `prompt`, `assetType`, `generator` or `asset`, `options`, `answer`, `explanation`, `difficulty`, `timeLimitSec`, `score`, `uiCopy`, `psychologyGoal`.
-17. The question bank must include 20 entries total.
-18. The first 18 entries must be standard scoring questions.
-19. The last 2 entries must be fun analysis questions.
+17. The question bank must include between 84 and 88 entries total.
+18. The question bank must include exactly 80 standard scoring questions.
+19. The question bank must include between 4 and 8 analysis questions reserved for result interpretation rather than core score.
 20. Categories must cover length, size, parallel-or-direction, color-or-brightness, and ambiguous image illusions.
 21. The engine must treat content files as external authored input and must not silently regenerate or overwrite them.
+22. Generator-backed questions may reuse the same illusion family only when authored with distinct visual variants that create materially different judgments for the player.
 
 ### Rendering
 
-22. The app must implement dynamic illusion renderers for:
+23. The app must implement dynamic illusion renderers for:
     `MullerLyer`, `Ponzo`, `Ebbinghaus`, `VerticalHorizontal`, `Zollner`, `CafeWall`, `CheckerShadow`, `Delboeuf`.
-23. Ambiguous image illusions such as duck-rabbit and old-young may use lightweight placeholder SVG or public assets.
-24. Visual assets must remain lightweight and suitable for mobile loading.
+24. Ambiguous image illusions such as duck-rabbit and old-young may use lightweight placeholder SVG or public assets.
+25. Visual assets must remain lightweight and suitable for mobile loading.
+26. The rendering contract must support authored generator variants so content authors can expand the bank without introducing a brand-new renderer for every new question.
 
 ### Persistence
 
-25. The app must persist best score and most recent result using `localStorage`.
-26. The app must restore persisted result data on the homepage and results page where relevant.
+27. The app must persist best score and most recent result using `localStorage`.
+28. The app must restore persisted result data on the homepage and results page where relevant.
 
 ### Deployment
 
-27. The project must be runnable with `npm install` and `npm run dev`.
-28. The app must be deployable to Vercel without backend configuration.
+29. The project must be runnable with `npm install` and `npm run dev`.
+30. The app must be deployable to Vercel without backend configuration.
 
 ## Non-Functional Requirements
 
@@ -170,3 +172,4 @@ The engine loads content from fixed JSON and Markdown interface files without in
 3. The content interface can be updated in `content-lab` without requiring direct edits to engine logic for ordinary copy changes.
 4. The app runs locally with `npm install` and `npm run dev` and is structured for Vercel deployment.
 5. The experience preserves a clear reversal rhythm through authored content rather than random generic quiz phrasing.
+6. The scoring bank is large enough that repeat play sessions usually surface meaningfully different question mixes instead of the same few prompts.

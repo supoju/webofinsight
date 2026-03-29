@@ -59,3 +59,13 @@
 - [x] T040 Write local run and Vercel deployment instructions in `README.md`
 - [x] T041 Verify `npm install` and `npm run dev` succeed in the engine worktree
 - [x] T042 Orchestrator review for contract compliance and merge readiness
+
+## Phase 7: Content Bank Expansion
+
+- [x] T043 Update content contract docs for the expanded mixed bank in `spec.md`, `plan.md`, and `tasks.md`
+- [x] T044 [P] Extend question typing and schema validation for generator-authored variants in `game-engine/src/types/content.ts` and `game-engine/src/lib/content/schema.ts`
+- [x] T045 [P] Extend illusion rendering to consume authored generator variants in `game-engine/src/components/illusions/`
+- [x] T046 [US4] Expand `content-lab/data/questions.json` to 80 score questions plus 4-8 analysis questions
+- [x] T047 [P] [US4] Update `content-lab/pacing/sequence.md` so the larger bank preserves progression and category balance
+- [x] T048 Add validation coverage for expanded bank counts and generator variants
+- [x] T049 Verify `npm --prefix game-engine run test` and `npm --prefix game-engine run build` after the bank expansion

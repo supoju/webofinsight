@@ -24,6 +24,7 @@ export type Question = {
   assetType: "generator" | "asset";
   generator?: string;
   asset?: string;
+  renderVariant?: string;
   options: string[];
   answer: number | string;
   explanation: string;

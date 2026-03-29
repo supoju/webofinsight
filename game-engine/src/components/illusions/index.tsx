@@ -16,21 +16,21 @@ export function IllusionStage({ question }: { question: Question }) {
 
   switch (question.generator) {
     case "MullerLyer":
-      return <MullerLyerIllusion />;
+      return <MullerLyerIllusion variant={question.renderVariant} />;
     case "Ponzo":
-      return <PonzoIllusion />;
+      return <PonzoIllusion variant={question.renderVariant} />;
     case "Ebbinghaus":
-      return <EbbinghausIllusion />;
+      return <EbbinghausIllusion variant={question.renderVariant} />;
     case "VerticalHorizontal":
-      return <VerticalHorizontalIllusion />;
+      return <VerticalHorizontalIllusion variant={question.renderVariant} />;
     case "Zollner":
-      return <ZollnerIllusion />;
+      return <ZollnerIllusion variant={question.renderVariant} />;
     case "CafeWall":
-      return <CafeWallIllusion />;
+      return <CafeWallIllusion variant={question.renderVariant} />;
     case "CheckerShadow":
-      return <CheckerShadowIllusion />;
+      return <CheckerShadowIllusion variant={question.renderVariant} />;
     case "Delboeuf":
-      return <DelboeufIllusion />;
+      return <DelboeufIllusion variant={question.renderVariant} />;
     default:
       return <AmbiguousAsset asset={question.asset} />;
   }

@@ -16,6 +16,7 @@ export const questionSchema = z
     assetType: z.enum(["generator", "asset"]),
     generator: z.string().min(1).optional(),
     asset: z.string().min(1).optional(),
+    renderVariant: z.string().min(1).optional(),
     options: z.array(z.string().min(1)).min(2),
     answer: z.union([z.number().int().nonnegative(), z.string().min(1)]),
     explanation: z.string().min(1),
@@ -66,4 +67,25 @@ export const questionSchema = z
 
 export const questionBankSchema = z
   .array(questionSchema)
-  .length(20, "question bank must contain exactly 20 entries");
+  .min(84, "question bank must contain at least 84 entries")
+  .max(88, "question bank must contain at most 88 entries")
+  .superRefine((questions, ctx) => {
+    const scoringQuestions = questions.filter((question) => question.mode === "score");
+    const analysisQuestions = questions.filter((question) => question.mode === "analysis");
+
+    if (scoringQuestions.length !== 80) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "question bank must contain exactly 80 standard scoring questions",
+        path: [],
+      });
+    }
+
+    if (analysisQuestions.length < 4 || analysisQuestions.length > 8) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "question bank must contain between 4 and 8 analysis questions",
+        path: [],
+      });
+    }
+  });

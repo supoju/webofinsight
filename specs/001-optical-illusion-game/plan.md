@@ -46,6 +46,7 @@
 - `content-lab/copy/results.md`: result interpretation copy blocks
 - `content-lab/copy/share.md`: share message templates
 - `content-lab/pacing/sequence.md`: question rhythm and reversal notes
+- Generator-backed questions may include authored render-variant metadata so one illusion family can produce multiple distinct challenge prompts without adding a new renderer name for each entry
 
 ### 4. Gameplay model
 
@@ -123,10 +124,17 @@
 - Add share card generation
 - Tune mobile UX, dark mode, and deployment readiness
 
+### Phase 6: Content bank expansion
+
+- Expand the scoring bank from MVP size to 80 authored score questions plus 4-8 analysis questions
+- Add authored visual variants for generator-based illusion families so repeated prompts are not identical clones
+- Preserve the worktree boundary so content-lab owns authored prompts while game-engine only extends the rendering contract
+
 ## Testing Strategy
 
-- Validate question schema and required fields
+- Validate question schema, required fields, and expanded bank-count rules
 - Test question selection excludes analysis mode from main run
+- Test generator variants are accepted by the rendering contract
 - Test timeout and scoring logic deterministically
 - Smoke test home -> game -> result flow
 - Verify storage fallback when `localStorage` is blocked

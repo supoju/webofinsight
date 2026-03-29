@@ -1,385 +1,1566 @@
 [
   {
-    "id": "q01-muller-lyer-outward",
+    "id": "q-ml-01",
     "category": "length",
     "mode": "score",
     "title": "箭头把你带偏了",
-    "prompt": "两条主线看起来一长一短。别急着押直觉，它们的实际长度关系是什么？",
+    "prompt": "别盯两端的箭头，只比较中间两条主线。它们的实际长度关系是什么？",
     "assetType": "generator",
     "generator": "MullerLyer",
+    "renderVariant": "classic-equal",
     "options": [
       "上面更长",
       "下面更长",
       "两条一样长"
     ],
     "answer": "两条一样长",
-    "explanation": "这是经典 Muller-Lyer 错觉。箭头朝外和朝内会改变你对线段终点位置的判断，让同长线段看起来不一样长。",
+    "explanation": "经典 Muller-Lyer 错觉会让箭头方向篡改你对线段终点的判断，所以同长主线也会显得一长一短。",
     "difficulty": "easy",
     "timeLimitSec": 5,
     "score": 100,
     "uiCopy": {
-      "correct": "你压住了箭头噪音，没有被外轮廓牵走。",
-      "wrong": "你被箭头骗走了，长度没变，变的是大脑的终点判断。",
-      "intro": "第一眼几乎都会选错，盯住中间主线本体。"
+      "intro": "先压住箭头噪音，再看主线本体。",
+      "correct": "你没有把箭头当成长度证据。",
+      "wrong": "你量到的是箭头气势，不是主线长度。"
     },
-    "psychologyGoal": "让玩家在开局就体验“明明看得很清楚却仍然被带偏”的反转。"
+    "psychologyGoal": "让玩家在开局就体验到“我明明看得很清楚，却还是会错”的反转。"
   },
   {
-    "id": "q02-muller-lyer-tight",
+    "id": "q-ml-02",
     "category": "length",
     "mode": "score",
-    "title": "越自信越容易翻车",
-    "prompt": "这一次箭头角度更夸张。你觉得哪条主线更长？",
+    "title": "尖角越狠，错觉越响",
+    "prompt": "这一版箭头更尖、更贴近主线。上面和下面哪条真正更长？",
     "assetType": "generator",
     "generator": "MullerLyer",
+    "renderVariant": "tight-equal",
     "options": [
-      "左边更长",
-      "右边更长",
+      "上面更长",
+      "下面更长",
       "两条一样长"
     ],
     "answer": "两条一样长",
-    "explanation": "同一种错觉在更尖锐的箭头条件下通常更强。你的视觉系统会把箭头形状误当成长度信息。",
+    "explanation": "当箭头角度更尖锐时，视觉系统更容易把附加形状误当成长度线索，但主线本身仍然等长。",
     "difficulty": "medium",
     "timeLimitSec": 5,
     "score": 110,
     "uiCopy": {
-      "correct": "你没有被强化版假信号带跑。",
-      "wrong": "这题专门放大错觉强度，越笃定的人越容易中招。",
-      "intro": "别让“更夸张的箭头”自动等于“更长的线”。"
+      "intro": "角度被放大了，主线并没有。",
+      "correct": "你扛住了强化版假信号。",
+      "wrong": "箭头被你自动翻译成了长度差。"
     },
-    "psychologyGoal": "强化玩家对自身直觉的不确定感，形成第二次反转。"
+    "psychologyGoal": "强化第一次反转后的不确定感，让玩家意识到自信会继续害人。"
   },
   {
-    "id": "q03-ponzo-tracks",
+    "id": "q-ml-03",
     "category": "length",
     "mode": "score",
-    "title": "透视在偷偷改写长度",
-    "prompt": "两条横线放在收拢的轨道之间。看起来上面更长，但真实情况呢？",
+    "title": "外张感会偷走判断",
+    "prompt": "这一版两端张得更开。请判断上面和下面主线的真实长度关系。",
     "assetType": "generator",
-    "generator": "Ponzo",
+    "generator": "MullerLyer",
+    "renderVariant": "wide-equal",
     "options": [
       "上面更长",
       "下面更长",
       "两条一样长"
     ],
     "answer": "两条一样长",
-    "explanation": "Ponzo 错觉利用透视线索，让更“远”的对象被大脑自动补偿成更大或更长。",
+    "explanation": "更宽的外张轮廓会制造更强的扩张感，但线段实际没有被拉长。",
+    "difficulty": "medium",
+    "timeLimitSec": 5,
+    "score": 110,
+    "uiCopy": {
+      "intro": "轮廓更夸张，不代表主线更长。",
+      "correct": "你把视觉气势和真实长度分开了。",
+      "wrong": "你被“张开得更大”误导成了“本体更长”。"
+    },
+    "psychologyGoal": "把同一错觉做出第二层变体，证明玩家不是只会在一种图上出错。"
+  },
+  {
+    "id": "q-ml-04",
+    "category": "length",
+    "mode": "score",
+    "title": "这次上面真的更长",
+    "prompt": "别默认它又是等长陷阱。上面和下面哪条主线实际更长？",
+    "assetType": "generator",
+    "generator": "MullerLyer",
+    "renderVariant": "top-longer",
+    "options": [
+      "上面更长",
+      "下面更长",
+      "两条一样长"
+    ],
+    "answer": "上面更长",
+    "explanation": "这题在保留 Muller-Lyer 外观的同时，真的把上方主线做长了，用来打破“这类题答案一定相同”的偷懒策略。",
+    "difficulty": "medium",
+    "timeLimitSec": 5,
+    "score": 120,
+    "uiCopy": {
+      "intro": "不是所有箭头题都在演同一个套路。",
+      "correct": "你没有被前几题训练成机械回答。",
+      "wrong": "你把题型记忆当成了答案。"
+    },
+    "psychologyGoal": "制造第二次反转，让玩家意识到题型熟悉不等于可以无脑猜。"
+  },
+  {
+    "id": "q-ml-05",
+    "category": "length",
+    "mode": "score",
+    "title": "这次下面才是长的",
+    "prompt": "如果你还沿用上一题的节奏，很容易翻车。哪条主线实际更长？",
+    "assetType": "generator",
+    "generator": "MullerLyer",
+    "renderVariant": "bottom-longer",
+    "options": [
+      "上面更长",
+      "下面更长",
+      "两条一样长"
+    ],
+    "answer": "下面更长",
+    "explanation": "同一视觉家族里混入真实差值，可以迫使玩家重新观察，而不是依赖题型惯性。",
+    "difficulty": "medium",
+    "timeLimitSec": 5,
+    "score": 120,
+    "uiCopy": {
+      "intro": "这题专门抓“顺手延续上一题答案”的人。",
+      "correct": "你重新看了图，而不是照抄记忆。",
+      "wrong": "你被题型惯性带着走了。"
+    },
+    "psychologyGoal": "把“我已经掌握规则了”的安全感再拆掉一次。"
+  },
+  {
+    "id": "q-ml-06",
+    "category": "length",
+    "mode": "score",
+    "title": "方向统一后更难分辨",
+    "prompt": "这一版上下两条主线都配了外张箭头。它们真实长度关系是什么？",
+    "assetType": "generator",
+    "generator": "MullerLyer",
+    "renderVariant": "top-outward",
+    "options": [
+      "上面更长",
+      "下面更长",
+      "两条一样长"
+    ],
+    "answer": "两条一样长",
+    "explanation": "当两组箭头方向统一时，玩家更难借局部差异做排除，但主线仍然保持等长。",
+    "difficulty": "hard",
+    "timeLimitSec": 5,
+    "score": 130,
+    "uiCopy": {
+      "intro": "当两边都很像时，大脑会更急着找假差异。",
+      "correct": "你没有被统一外张的气势骗走。",
+      "wrong": "你在硬找差别，于是看见了并不存在的长短。"
+    },
+    "psychologyGoal": "在高相似度条件下制造误判，抬高后段难度。"
+  },
+  {
+    "id": "q-ml-07",
+    "category": "length",
+    "mode": "score",
+    "title": "收口一致也会骗你",
+    "prompt": "上下两条主线都配了内收箭头。它们实际谁更长？",
+    "assetType": "generator",
+    "generator": "MullerLyer",
+    "renderVariant": "bottom-inward",
+    "options": [
+      "上面更长",
+      "下面更长",
+      "两条一样长"
+    ],
+    "answer": "两条一样长",
+    "explanation": "内收箭头会让端点像被挤压进线段内部，从而让你对真实长度失去把握。",
+    "difficulty": "hard",
+    "timeLimitSec": 5,
+    "score": 130,
+    "uiCopy": {
+      "intro": "别把“都在往里收”理解成某一条更短。",
+      "correct": "你守住了端点判断。",
+      "wrong": "箭头往里扣住了你的长度直觉。"
+    },
+    "psychologyGoal": "继续证明长度错觉并不依赖单一朝向，避免玩家用图感投机。"
+  },
+  {
+    "id": "q-ml-08",
+    "category": "length",
+    "mode": "score",
+    "title": "不对称时最容易自信过头",
+    "prompt": "上面的箭头和下面的箭头张力并不完全对称。哪条主线实际更长？",
+    "assetType": "generator",
+    "generator": "MullerLyer",
+    "renderVariant": "asymmetric",
+    "options": [
+      "上面更长",
+      "下面更长",
+      "两条一样长"
+    ],
+    "answer": "下面更长",
+    "explanation": "这道不对称版本同时混入真实长度差和不同箭头张力，最容易让人把“看起来复杂”误当成“我肯定看出来了”。",
+    "difficulty": "hard",
+    "timeLimitSec": 5,
+    "score": 140,
+    "uiCopy": {
+      "intro": "复杂度升高时，第一眼自信通常最不可靠。",
+      "correct": "你在混合信号里仍然抓住了真实差值。",
+      "wrong": "你被不对称张力盖过了真实长度。"
+    },
+    "psychologyGoal": "把长度类推到一个高噪音峰值，形成中段记忆点。"
+  },
+  {
+    "id": "q-pz-01",
+    "category": "length",
+    "mode": "score",
+    "title": "铁轨把远处那条抬长了",
+    "prompt": "两条横线夹在收拢的轨道里。它们实际长度关系是什么？",
+    "assetType": "generator",
+    "generator": "Ponzo",
+    "renderVariant": "rails-equal",
+    "options": [
+      "上面更长",
+      "下面更长",
+      "两条一样长"
+    ],
+    "answer": "两条一样长",
+    "explanation": "Ponzo 错觉会把更像“远处”的对象自动补偿成更长，因此同长横线也会显得不一样。",
     "difficulty": "easy",
     "timeLimitSec": 5,
     "score": 100,
     "uiCopy": {
+      "intro": "轨道在制造远近感，不是在告诉你真实长度。",
       "correct": "你看穿了透视补偿。",
-      "wrong": "你不是在量线段，而是在相信“远处的东西应该更大”。",
-      "intro": "轨道在制造远近感，别让空间感冒充长度差。"
+      "wrong": "你相信了“远处那条应该更长”的空间叙事。"
     },
-    "psychologyGoal": "让玩家感受到深度线索如何瞬间劫持简单判断。"
+    "psychologyGoal": "把长度判断从箭头切到透视，让玩家意识到深度线索也会劫持直觉。"
   },
   {
-    "id": "q04-vertical-horizontal-cross",
+    "id": "q-pz-02",
     "category": "length",
     "mode": "score",
-    "title": "竖线总爱显得更长",
-    "prompt": "十字图形里，竖线和横线谁更长？",
+    "title": "透视更陡，误判更猛",
+    "prompt": "这版轨道收拢得更陡。上面和下面的横线真实谁更长？",
+    "assetType": "generator",
+    "generator": "Ponzo",
+    "renderVariant": "steep-equal",
+    "options": [
+      "上面更长",
+      "下面更长",
+      "两条一样长"
+    ],
+    "answer": "两条一样长",
+    "explanation": "当透视线更陡时，大脑更容易把上方横线解释成“更远但投影相同”，于是主观上被放大。",
+    "difficulty": "medium",
+    "timeLimitSec": 5,
+    "score": 110,
+    "uiCopy": {
+      "intro": "远近感越强，越容易忘记题目在问线段本身。",
+      "correct": "你没有把空间感错译成长度差。",
+      "wrong": "透视被你自动换算成了长度。"
+    },
+    "psychologyGoal": "放大透视强度，延续玩家“简单线段题也会翻车”的体验。"
+  },
+  {
+    "id": "q-pz-03",
+    "category": "length",
+    "mode": "score",
+    "title": "收拢没那么狠，也照样会骗",
+    "prompt": "这一版轨道更平缓。请判断上面和下面横线的真实长度关系。",
+    "assetType": "generator",
+    "generator": "Ponzo",
+    "renderVariant": "shallow-equal",
+    "options": [
+      "上面更长",
+      "下面更长",
+      "两条一样长"
+    ],
+    "answer": "两条一样长",
+    "explanation": "即使透视线索减弱，只要场景仍在暗示远近，大脑就会持续做尺度补偿。",
+    "difficulty": "medium",
+    "timeLimitSec": 5,
+    "score": 110,
+    "uiCopy": {
+      "intro": "错觉不一定要很夸张才会生效。",
+      "correct": "你没有被轻量版透视骗过。",
+      "wrong": "你把微弱的远近线索也当成了真实差值。"
+    },
+    "psychologyGoal": "说明玩家的问题不是某一张图太极端，而是视觉系统本身会自动补偿。"
+  },
+  {
+    "id": "q-pz-04",
+    "category": "length",
+    "mode": "score",
+    "title": "这次上面真的更长",
+    "prompt": "别被前面几题训练成固定答案。现在上面和下面谁实际更长？",
+    "assetType": "generator",
+    "generator": "Ponzo",
+    "renderVariant": "top-longer",
+    "options": [
+      "上面更长",
+      "下面更长",
+      "两条一样长"
+    ],
+    "answer": "上面更长",
+    "explanation": "这题保留 Ponzo 结构，但把上方横线真实做长，用来打断“透视题都等长”的机械策略。",
+    "difficulty": "medium",
+    "timeLimitSec": 5,
+    "score": 120,
+    "uiCopy": {
+      "intro": "熟悉题型之后，最危险的是偷懒。",
+      "correct": "你重新观察了真实长度。",
+      "wrong": "你把家族规律误当成了通用答案。"
+    },
+    "psychologyGoal": "用真实差值打破题型记忆，阻止玩家靠套路通关。"
+  },
+  {
+    "id": "q-pz-05",
+    "category": "length",
+    "mode": "score",
+    "title": "这次下面更长才是真的",
+    "prompt": "上下仍处在同一组透视轨道里，但真实长度已经改了。哪条更长？",
+    "assetType": "generator",
+    "generator": "Ponzo",
+    "renderVariant": "bottom-longer",
+    "options": [
+      "上面更长",
+      "下面更长",
+      "两条一样长"
+    ],
+    "answer": "下面更长",
+    "explanation": "当视觉框架不变而真实差值变化时，玩家最容易继续照着上一题的心理预期作答。",
+    "difficulty": "medium",
+    "timeLimitSec": 5,
+    "score": 120,
+    "uiCopy": {
+      "intro": "同一家族里，真正危险的是连续性。",
+      "correct": "你没有被上一题答案残影带偏。",
+      "wrong": "你延续了上一题的判断节奏。"
+    },
+    "psychologyGoal": "连续制造方向相反的真实差值，让玩家无法靠短期记忆混过去。"
+  },
+  {
+    "id": "q-pz-06",
+    "category": "length",
+    "mode": "score",
+    "title": "轨道挤得更紧，错觉更黏",
+    "prompt": "收拢线之间的上方间距更窄。请判断两条横线的真实长度关系。",
+    "assetType": "generator",
+    "generator": "Ponzo",
+    "renderVariant": "narrow-gap",
+    "options": [
+      "上面更长",
+      "下面更长",
+      "两条一样长"
+    ],
+    "answer": "两条一样长",
+    "explanation": "当顶部间距更窄时，远近压缩感更强，玩家更容易高估上方横线，但它们仍然等长。",
+    "difficulty": "hard",
+    "timeLimitSec": 5,
+    "score": 130,
+    "uiCopy": {
+      "intro": "空间被挤压时，主观补偿会更激进。",
+      "correct": "你没有让“压缩感”替长度发言。",
+      "wrong": "你把空间压缩误听成了长度变化。"
+    },
+    "psychologyGoal": "把透视类推进到高压缩版本，提升后段难度。"
+  },
+  {
+    "id": "q-pz-07",
+    "category": "length",
+    "mode": "score",
+    "title": "轨道拉得更开，也照样诱导你",
+    "prompt": "这一版顶部开口更宽。上面和下面横线实际谁更长？",
+    "assetType": "generator",
+    "generator": "Ponzo",
+    "renderVariant": "wide-gap",
+    "options": [
+      "上面更长",
+      "下面更长",
+      "两条一样长"
+    ],
+    "answer": "两条一样长",
+    "explanation": "即便上方开口更宽，只要轨道仍暗示纵深，视觉系统就会继续尝试做距离校正。",
+    "difficulty": "hard",
+    "timeLimitSec": 5,
+    "score": 130,
+    "uiCopy": {
+      "intro": "透视不是只有收得很紧才会生效。",
+      "correct": "你从宽开口里仍然守住了事实。",
+      "wrong": "你把场景感当成了证据。"
+    },
+    "psychologyGoal": "说明错觉不靠某个单一参数，而是靠整体空间组织。"
+  },
+  {
+    "id": "q-pz-08",
+    "category": "length",
+    "mode": "score",
+    "title": "压缩到极致时最容易认错",
+    "prompt": "顶部横线被放得更短、轨道压缩也更强。现在真实长度关系是什么？",
+    "assetType": "generator",
+    "generator": "Ponzo",
+    "renderVariant": "high-compression",
+    "options": [
+      "上面更长",
+      "下面更长",
+      "两条一样长"
+    ],
+    "answer": "两条一样长",
+    "explanation": "这类高压缩版本最容易让玩家坚信上方横线“看起来明显更长”，但实际仍未发生变化。",
+    "difficulty": "hard",
+    "timeLimitSec": 5,
+    "score": 140,
+    "uiCopy": {
+      "intro": "越像送你一个明显答案，越该慢半拍。",
+      "correct": "你顶住了最强透视幻觉。",
+      "wrong": "你中了“看起来太明显”的陷阱。"
+    },
+    "psychologyGoal": "把透视类推到高峰，制造一次典型的“越自信越错”。"
+  },
+  {
+    "id": "q-vh-01",
+    "category": "length",
+    "mode": "score",
+    "title": "竖线其实更长",
+    "prompt": "十字图形里，竖线和横线谁的真实长度更长？",
     "assetType": "generator",
     "generator": "VerticalHorizontal",
+    "renderVariant": "cross-equal",
     "options": [
       "竖线更长",
       "横线更长",
       "一样长"
     ],
-    "answer": "一样长",
-    "explanation": "Vertical-Horizontal 错觉会让竖直方向显得更长，尤其在交叉或边界受限时更明显。",
+    "answer": "竖线更长",
+    "explanation": "这版图形不仅会让竖线主观上更突出，竖直线本体也确实更长，因此最容易把“错觉”与“事实”混为一谈。",
     "difficulty": "easy",
     "timeLimitSec": 5,
-    "score": 90,
+    "score": 95,
     "uiCopy": {
-      "correct": "你压住了“竖着就更长”的自动判断。",
-      "wrong": "大脑对垂直维度更敏感，所以你看到了并不存在的额外长度。",
-      "intro": "这题很像送分题，通常也是最容易大意失分的一题。"
+      "intro": "别只问自己看起来像什么，也要问图里真画了什么。",
+      "correct": "你分清了直觉增强和真实差值。",
+      "wrong": "你被十字外观带偏，没抓住本体长度。"
     },
-    "psychologyGoal": "利用低门槛外观制造掉以轻心，再给出反转。"
+    "psychologyGoal": "让玩家知道不是所有 Vertical-Horizontal 题都在考“是否一样长”。"
   },
   {
-    "id": "q05-ebbinghaus-large-ring",
-    "category": "size",
+    "id": "q-vh-02",
+    "category": "length",
     "mode": "score",
-    "title": "周围越大，中间越小",
-    "prompt": "两个中心圆看起来大小不同。真实关系是什么？",
+    "title": "中心一偏，仍是竖线更长",
+    "prompt": "交叉点不在正中央时，你会更容易误判。竖线和横线真实谁更长？",
     "assetType": "generator",
-    "generator": "Ebbinghaus",
+    "generator": "VerticalHorizontal",
+    "renderVariant": "offset-cross",
     "options": [
-      "左边更大",
-      "右边更大",
-      "一样大"
+      "竖线更长",
+      "横线更长",
+      "一样长"
     ],
-    "answer": "一样大",
-    "explanation": "Ebbinghaus 错觉说明大小判断高度依赖上下文。被大圆包围的中心圆会显得更小，被小圆包围的会显得更大。",
+    "answer": "竖线更长",
+    "explanation": "交叉点偏移会破坏对称感，但不会改变这版图里竖直线更长的事实。",
     "difficulty": "easy",
     "timeLimitSec": 5,
     "score": 100,
     "uiCopy": {
-      "correct": "你把背景噪音剥掉了。",
-      "wrong": "你比较的其实不是中心圆，而是它们和周围圆的关系。",
-      "intro": "别盯陪衬，真正要比较的是两个中心圆。"
+      "intro": "位置偏了，长度关系没跟着乱。",
+      "correct": "你没有让偏心布局扰乱比较。",
+      "wrong": "你被不对称布局转移了注意力。"
     },
-    "psychologyGoal": "让玩家体验“参照物才是骗子”的心理落差。"
+    "psychologyGoal": "把方向类从标准十字改成偏心布局，降低玩家的比较稳定性。"
   },
   {
-    "id": "q06-delboeuf-wide-ring",
-    "category": "size",
+    "id": "q-vh-03",
+    "category": "length",
     "mode": "score",
-    "title": "圆环让尺寸失真",
-    "prompt": "两个内圆分别套在不同大小的圆环中。哪一个内圆实际更大？",
+    "title": "顶端锚住后还是竖线更长",
+    "prompt": "竖线顶端被强调固定，横线穿过中部。真实长度关系是什么？",
     "assetType": "generator",
-    "generator": "Delboeuf",
+    "generator": "VerticalHorizontal",
+    "renderVariant": "top-anchored",
     "options": [
-      "左边更大",
-      "右边更大",
-      "一样大"
+      "竖线更长",
+      "横线更长",
+      "一样长"
     ],
-    "answer": "一样大",
-    "explanation": "Delboeuf 错觉和餐盘错觉类似。内圆的观感会被外圈大小拉扯，导致同样大小的目标看起来不一致。",
+    "answer": "竖线更长",
+    "explanation": "边界锚点会增强玩家对垂直延展的感受，而这版图里竖线本体也确实更长。",
     "difficulty": "medium",
     "timeLimitSec": 5,
     "score": 110,
     "uiCopy": {
-      "correct": "你没有让外圈替内圆发言。",
-      "wrong": "外圈大小改写了对比例尺，所以你的第一眼被盘子骗了。",
-      "intro": "你看到的是“盘子效应”，不是内圆本体。"
+      "intro": "被锚住的一端很抢眼，但答案仍要看总长度。",
+      "correct": "你抓住了整条竖线的真实跨度。",
+      "wrong": "你只看了交叉感，没有量完整延展。"
     },
-    "psychologyGoal": "把日常餐盘式错觉转成即时惊奇，增强代入感。"
+    "psychologyGoal": "继续训练玩家在布局变化中比较整体，而不是盯住局部交叉点。"
   },
   {
-    "id": "q07-ebbinghaus-tight-cluster",
-    "category": "size",
+    "id": "q-vh-04",
+    "category": "length",
     "mode": "score",
-    "title": "越拥挤越容易误判",
-    "prompt": "这组圆形周围的陪衬更密。中间两个圆的真实大小关系是？",
+    "title": "底端拉长，竖线仍占上风",
+    "prompt": "当竖线向下延展得更明显时，竖线和横线真实谁更长？",
     "assetType": "generator",
-    "generator": "Ebbinghaus",
+    "generator": "VerticalHorizontal",
+    "renderVariant": "bottom-anchored",
     "options": [
-      "左边更大",
-      "右边更大",
-      "一样大"
+      "竖线更长",
+      "横线更长",
+      "一样长"
     ],
-    "answer": "一样大",
-    "explanation": "当外围元素密集时，你的大脑更容易把整体场景当成尺度参考，导致中心目标被进一步扭曲。",
+    "answer": "竖线更长",
+    "explanation": "底部延展会让竖线的“视觉重量”更强，但本题不只是错觉，竖线真实长度也更长。",
+    "difficulty": "medium",
+    "timeLimitSec": 5,
+    "score": 110,
+    "uiCopy": {
+      "intro": "不要因为像“显而易见”就跳过观察。",
+      "correct": "你把显眼和真实同时看清了。",
+      "wrong": "你可能被交叉处卡住，没看完整条竖线。"
+    },
+    "psychologyGoal": "让玩家在“太明显”与“怕被反转”之间犹豫，从而增加认知负荷。"
+  },
+  {
+    "id": "q-vh-05",
+    "category": "length",
+    "mode": "score",
+    "title": "这题真的把竖线做长了",
+    "prompt": "别再把它当成纯错觉示意图。此时竖线和横线真实谁更长？",
+    "assetType": "generator",
+    "generator": "VerticalHorizontal",
+    "renderVariant": "vertical-longer",
+    "options": [
+      "竖线更长",
+      "横线更长",
+      "一样长"
+    ],
+    "answer": "竖线更长",
+    "explanation": "这道题直接扩大了竖直方向的真实长度，用来确认玩家是否还能在家族熟悉后认真比对。",
     "difficulty": "medium",
     "timeLimitSec": 5,
     "score": 120,
     "uiCopy": {
-      "correct": "你在拥挤干扰里仍然锁住了目标。",
-      "wrong": "这题故意把参照物做得更吵，你的估计因此漂移了。",
-      "intro": "密集背景会放大你的错觉，不要被场面吓到。"
+      "intro": "当题型很熟时，认真观察反而最难。",
+      "correct": "你没有被“我知道这类题”麻痹。",
+      "wrong": "你对熟悉题型掉以轻心了。"
     },
-    "psychologyGoal": "提升压力感，让玩家感到自己在噪音中更容易被骗。"
+    "psychologyGoal": "把家族中段做成半真半幻的混合判断，避免玩家机械作答。"
   },
   {
-    "id": "q08-delboeuf-close-ring",
+    "id": "q-vh-06",
+    "category": "length",
+    "mode": "score",
+    "title": "这次横线反超了",
+    "prompt": "不要默认垂直一定赢。现在竖线和横线实际谁更长？",
+    "assetType": "generator",
+    "generator": "VerticalHorizontal",
+    "renderVariant": "horizontal-longer",
+    "options": [
+      "竖线更长",
+      "横线更长",
+      "一样长"
+    ],
+    "answer": "横线更长",
+    "explanation": "Vertical-Horizontal 错觉常让竖线看起来更占优势，但这题故意把横线真实做长，专门测试玩家能否压住先验。",
+    "difficulty": "medium",
+    "timeLimitSec": 5,
+    "score": 120,
+    "uiCopy": {
+      "intro": "越像“竖线会赢”的题，越可能故意反着来。",
+      "correct": "你压住了家族偏见。",
+      "wrong": "你先相信了“竖着就更长”。"
+    },
+    "psychologyGoal": "用反向真实差值打断玩家对垂直优势的固定印象。"
+  },
+  {
+    "id": "q-vh-07",
+    "category": "length",
+    "mode": "score",
+    "title": "粗线条更会放大错觉",
+    "prompt": "笔画加粗后，竖线和横线真实谁更长？",
+    "assetType": "generator",
+    "generator": "VerticalHorizontal",
+    "renderVariant": "thick-cross",
+    "options": [
+      "竖线更长",
+      "横线更长",
+      "一样长"
+    ],
+    "answer": "竖线更长",
+    "explanation": "加粗会让交叉区域更拥挤，进一步放大你对竖直延展的主观感受，而这版竖线也确实更长。",
+    "difficulty": "hard",
+    "timeLimitSec": 5,
+    "score": 130,
+    "uiCopy": {
+      "intro": "粗细改变的是感受强度，不是比较规则。",
+      "correct": "你在厚重笔画里仍然抓住了长度。",
+      "wrong": "你被粗线的存在感裹走了。"
+    },
+    "psychologyGoal": "把方向类推进到高显著版本，让误判更具压迫感。"
+  },
+  {
+    "id": "q-vh-08",
+    "category": "length",
+    "mode": "score",
+    "title": "细线条会让你过度补偿",
+    "prompt": "线条变细后，很多人会反向猜错。竖线和横线真实谁更长？",
+    "assetType": "generator",
+    "generator": "VerticalHorizontal",
+    "renderVariant": "slim-cross",
+    "options": [
+      "竖线更长",
+      "横线更长",
+      "一样长"
+    ],
+    "answer": "竖线更长",
+    "explanation": "当线条变细，玩家常因担心“这题肯定在骗我”而过度修正，但这版竖线仍然更长。",
+    "difficulty": "hard",
+    "timeLimitSec": 5,
+    "score": 130,
+    "uiCopy": {
+      "intro": "别为了防被骗而把自己修正过头。",
+      "correct": "你没有因为谨慎而反向失真。",
+      "wrong": "你在防错觉时又制造了新的错觉。"
+    },
+    "psychologyGoal": "利用玩家的自我校正倾向，制造更高级的二次误判。"
+  },
+  {
+    "id": "q-eb-01",
     "category": "size",
     "mode": "score",
-    "title": "贴得越近，错得越狠",
-    "prompt": "两个内圆外侧的圆环距离不同。你判断哪个内圆更大？",
+    "title": "大陪衬会把中心压小",
+    "prompt": "左右两个中心圆看起来大小不同。它们真实的大小关系是什么？",
     "assetType": "generator",
-    "generator": "Delboeuf",
+    "generator": "Ebbinghaus",
+    "renderVariant": "classic-equal",
     "options": [
       "左边更大",
       "右边更大",
       "一样大"
     ],
     "answer": "一样大",
-    "explanation": "外环离目标越近，目标与背景越容易被整合成一个整体，大小错觉也会更强。",
-    "difficulty": "hard",
-    "timeLimitSec": 5,
-    "score": 130,
-    "uiCopy": {
-      "correct": "你没有被贴边的假对比吞掉。",
-      "wrong": "靠近的外环把尺度线索挤进了目标里，所以你的大脑直接改口。",
-      "intro": "这题会让你产生“差一点点但就是不一样”的错觉。"
-    },
-    "psychologyGoal": "在中段制造一次更强的挫败感，抬高惊奇峰值。"
-  },
-  {
-    "id": "q09-zollner-slant",
-    "category": "parallel-direction",
-    "mode": "score",
-    "title": "平行线开始各走各的",
-    "prompt": "两条长线看起来像在发散。它们真实关系是什么？",
-    "assetType": "generator",
-    "generator": "Zollner",
-    "options": [
-      "不平行",
-      "平行",
-      "会相交"
-    ],
-    "answer": "平行",
-    "explanation": "Zollner 错觉利用短斜线干扰方向判断，让原本平行的长线看起来像在偏转。",
+    "explanation": "Ebbinghaus 错觉说明大小判断高度依赖上下文：被大圆包围的中心会显得更小，被小圆包围的会显得更大。",
     "difficulty": "easy",
     "timeLimitSec": 5,
     "score": 100,
     "uiCopy": {
-      "correct": "你把干扰和主体分开了。",
-      "wrong": "短斜线给了你假的旋转感，平行因此被误读。",
-      "intro": "别跟着短斜线跑，真正要比的是长线方向。"
+      "intro": "别比较陪衬，只比较两个中心圆。",
+      "correct": "你把背景噪音剥掉了。",
+      "wrong": "你比较成了中心圆和陪衬的关系。"
     },
-    "psychologyGoal": "从长度切到方向，让玩家感到视觉系统在不同维度都不可靠。"
+    "psychologyGoal": "让玩家切身体会“参照物才是骗子”的落差。"
   },
   {
-    "id": "q10-cafe-wall-offset",
+    "id": "q-eb-02",
+    "category": "size",
+    "mode": "score",
+    "title": "陪衬对调，错觉也跟着翻面",
+    "prompt": "左右两边的外围圆配置被交换后，中心圆真实关系是什么？",
+    "assetType": "generator",
+    "generator": "Ebbinghaus",
+    "renderVariant": "reverse-equal",
+    "options": [
+      "左边更大",
+      "右边更大",
+      "一样大"
+    ],
+    "answer": "一样大",
+    "explanation": "当外围大圆和小圆左右对调时，主观印象会翻面，但中心圆本身仍然等大。",
+    "difficulty": "medium",
+    "timeLimitSec": 5,
+    "score": 110,
+    "uiCopy": {
+      "intro": "错觉方向可以翻转，本体未必改变。",
+      "correct": "你没有被左右互换骗走。",
+      "wrong": "你顺着陪衬的戏剧性改口了。"
+    },
+    "psychologyGoal": "让玩家看到同一种机制如何仅靠背景交换就改变结论。"
+  },
+  {
+    "id": "q-eb-03",
+    "category": "size",
+    "mode": "score",
+    "title": "陪衬贴近后更难守住中心",
+    "prompt": "外围圆离中心更近时，左右中心圆真实谁更大？",
+    "assetType": "generator",
+    "generator": "Ebbinghaus",
+    "renderVariant": "tight-equal",
+    "options": [
+      "左边更大",
+      "右边更大",
+      "一样大"
+    ],
+    "answer": "一样大",
+    "explanation": "陪衬靠得更近时，目标与背景更容易被整合成一个整体，于是误判更强，但中心仍等大。",
+    "difficulty": "medium",
+    "timeLimitSec": 5,
+    "score": 110,
+    "uiCopy": {
+      "intro": "距离越近，越要强行把中心单独拿出来看。",
+      "correct": "你没有让贴边陪衬接管判断。",
+      "wrong": "近距离背景把你的尺度感挤歪了。"
+    },
+    "psychologyGoal": "提高尺寸类压迫感，让玩家感觉自己在被背景包围。"
+  },
+  {
+    "id": "q-eb-04",
+    "category": "size",
+    "mode": "score",
+    "title": "陪衬拉远了，也不代表真变大",
+    "prompt": "外围圆被放得更松散。请判断左右中心圆的真实关系。",
+    "assetType": "generator",
+    "generator": "Ebbinghaus",
+    "renderVariant": "loose-equal",
+    "options": [
+      "左边更大",
+      "右边更大",
+      "一样大"
+    ],
+    "answer": "一样大",
+    "explanation": "即使外围圆离得更远，视觉系统仍会把整体构图当成尺寸标尺，因此等大的中心圆仍可能看起来不等。",
+    "difficulty": "medium",
+    "timeLimitSec": 5,
+    "score": 110,
+    "uiCopy": {
+      "intro": "陪衬松了，不代表影响消失。",
+      "correct": "你看穿了稀疏背景的温和欺骗。",
+      "wrong": "你以为背景远一点就不会起作用。"
+    },
+    "psychologyGoal": "说明尺寸错觉不只靠拥挤，也能靠整体组织生效。"
+  },
+  {
+    "id": "q-eb-05",
+    "category": "size",
+    "mode": "score",
+    "title": "这次左边真的更大",
+    "prompt": "别默认所有 Ebbinghaus 题都在考等大。左右中心圆实际谁更大？",
+    "assetType": "generator",
+    "generator": "Ebbinghaus",
+    "renderVariant": "left-larger",
+    "options": [
+      "左边更大",
+      "右边更大",
+      "一样大"
+    ],
+    "answer": "左边更大",
+    "explanation": "这题在保留典型陪衬结构的同时，真实把左侧中心圆做大，用来打断玩家对“答案恒等”的投机。",
+    "difficulty": "medium",
+    "timeLimitSec": 5,
+    "score": 120,
+    "uiCopy": {
+      "intro": "熟悉机制之后，真正危险的是懒得再看。",
+      "correct": "你看见了真实差值，而不是只记住套路。",
+      "wrong": "你把家族印象当成了答案模板。"
+    },
+    "psychologyGoal": "在尺寸类中段混入真实差值，阻止机械记忆。"
+  },
+  {
+    "id": "q-eb-06",
+    "category": "size",
+    "mode": "score",
+    "title": "这次右边才是大的",
+    "prompt": "背景看着还是很会骗人，但左右中心圆这次真实谁更大？",
+    "assetType": "generator",
+    "generator": "Ebbinghaus",
+    "renderVariant": "right-larger",
+    "options": [
+      "左边更大",
+      "右边更大",
+      "一样大"
+    ],
+    "answer": "右边更大",
+    "explanation": "连续两题方向相反的真实差值，会迫使玩家重新观察中心圆，而不能只靠刚建立的节奏。",
+    "difficulty": "medium",
+    "timeLimitSec": 5,
+    "score": 120,
+    "uiCopy": {
+      "intro": "上一题的经验，在这题可能正好害你。",
+      "correct": "你没有延续旧答案，而是重新比较了目标。",
+      "wrong": "你被连续题节奏牵着走了。"
+    },
+    "psychologyGoal": "继续拆掉玩家刚形成的家族记忆。"
+  },
+  {
+    "id": "q-eb-07",
+    "category": "size",
+    "mode": "score",
+    "title": "密集包围最容易让中心失真",
+    "prompt": "外围圆更密、更近时，左右中心圆真实关系是什么？",
+    "assetType": "generator",
+    "generator": "Ebbinghaus",
+    "renderVariant": "compact-ring",
+    "options": [
+      "左边更大",
+      "右边更大",
+      "一样大"
+    ],
+    "answer": "一样大",
+    "explanation": "高密度陪衬会让中心尺寸更容易被背景吞没，因此同样大小的目标更像是被强行拉开。",
+    "difficulty": "hard",
+    "timeLimitSec": 5,
+    "score": 130,
+    "uiCopy": {
+      "intro": "场面越吵，越要盯住真正被比较的对象。",
+      "correct": "你在拥挤噪音里仍守住了中心。",
+      "wrong": "你被密集陪衬改写了标尺。"
+    },
+    "psychologyGoal": "把尺寸类推到高噪音版本，制造更明显的挫败感。"
+  },
+  {
+    "id": "q-eb-08",
+    "category": "size",
+    "mode": "score",
+    "title": "稀疏环绕会诱导过度修正",
+    "prompt": "外围圆更稀、更远时，很多人会反向猜错。左右中心圆真实谁更大？",
+    "assetType": "generator",
+    "generator": "Ebbinghaus",
+    "renderVariant": "sparse-ring",
+    "options": [
+      "左边更大",
+      "右边更大",
+      "一样大"
+    ],
+    "answer": "一样大",
+    "explanation": "当陪衬稀疏时，玩家常因怀疑自己被错觉骗而过度修正，但中心圆其实仍然等大。",
+    "difficulty": "hard",
+    "timeLimitSec": 5,
+    "score": 130,
+    "uiCopy": {
+      "intro": "防被骗这件事，本身也可能把你带偏。",
+      "correct": "你没有因为自我校正而反向失真。",
+      "wrong": "你在修正错觉时又制造了新偏差。"
+    },
+    "psychologyGoal": "利用玩家的防御心理，制造尺寸类的二级反转。"
+  },
+  {
+    "id": "q-db-01",
+    "category": "size",
+    "mode": "score",
+    "title": "盘子会替食物发言",
+    "prompt": "两个内圆分别落在不同大小的外环里。它们真实大小关系是什么？",
+    "assetType": "generator",
+    "generator": "Delboeuf",
+    "renderVariant": "classic-equal",
+    "options": [
+      "左边更大",
+      "右边更大",
+      "一样大"
+    ],
+    "answer": "一样大",
+    "explanation": "Delboeuf 错觉和餐盘错觉类似：外圈大小会改写你对内圆的估计，让同样大小的目标看起来不一致。",
+    "difficulty": "easy",
+    "timeLimitSec": 5,
+    "score": 100,
+    "uiCopy": {
+      "intro": "看的是内圆，不是盘子。",
+      "correct": "你没有让外环替目标发言。",
+      "wrong": "你把外圈当成了尺寸标尺。"
+    },
+    "psychologyGoal": "把尺寸错觉从陪衬点阵换成环形边界，丰富玩家的受骗方式。"
+  },
+  {
+    "id": "q-db-02",
+    "category": "size",
+    "mode": "score",
+    "title": "外环拉得更开，也会误导你",
+    "prompt": "左侧外环更宽、右侧更紧时，两个内圆真实谁更大？",
+    "assetType": "generator",
+    "generator": "Delboeuf",
+    "renderVariant": "wide-gap",
+    "options": [
+      "左边更大",
+      "右边更大",
+      "一样大"
+    ],
+    "answer": "一样大",
+    "explanation": "外环与内圆间距不同会改变“盘子感”，但内圆本身仍保持同样大小。",
+    "difficulty": "medium",
+    "timeLimitSec": 5,
+    "score": 110,
+    "uiCopy": {
+      "intro": "间距变化很抢眼，但别让它盖住目标本体。",
+      "correct": "你把外环距离和内圆大小分开了。",
+      "wrong": "你被盘子边界带偏了。"
+    },
+    "psychologyGoal": "说明尺寸扭曲不只来自外围大小，也来自边界距离。"
+  },
+  {
+    "id": "q-db-03",
+    "category": "size",
+    "mode": "score",
+    "title": "贴得太近时最容易觉得不同",
+    "prompt": "当外环更贴近内圆时，左右内圆真实大小关系是什么？",
+    "assetType": "generator",
+    "generator": "Delboeuf",
+    "renderVariant": "tight-gap",
+    "options": [
+      "左边更大",
+      "右边更大",
+      "一样大"
+    ],
+    "answer": "一样大",
+    "explanation": "外环越贴近目标，越容易被大脑整合成一个整体，所以等大的内圆会更像存在差值。",
+    "difficulty": "medium",
+    "timeLimitSec": 5,
+    "score": 110,
+    "uiCopy": {
+      "intro": "越贴边，越该强迫自己只看中心。",
+      "correct": "你没有被贴边的盘子效应吞掉。",
+      "wrong": "外环离得太近，把你的尺度感挤歪了。"
+    },
+    "psychologyGoal": "把 Delboeuf 推到更黏人的版本，抬高中段强度。"
+  },
+  {
+    "id": "q-db-04",
+    "category": "size",
+    "mode": "score",
+    "title": "这次左边内圆真的更大",
+    "prompt": "别把所有盘子题都当成等大陷阱。现在左右内圆真实谁更大？",
+    "assetType": "generator",
+    "generator": "Delboeuf",
+    "renderVariant": "left-larger",
+    "options": [
+      "左边更大",
+      "右边更大",
+      "一样大"
+    ],
+    "answer": "左边更大",
+    "explanation": "这题保留 Delboeuf 外观，但真实增大了左侧内圆，专门测试玩家是否还能认真比较本体。",
+    "difficulty": "medium",
+    "timeLimitSec": 5,
+    "score": 120,
+    "uiCopy": {
+      "intro": "熟悉结构之后，最容易把真差值看漏。",
+      "correct": "你重新看了内圆，而不是套模板。",
+      "wrong": "你把“多半一样大”偷懒成了答案。"
+    },
+    "psychologyGoal": "用真实差值打断玩家对环形错觉的固定预期。"
+  },
+  {
+    "id": "q-db-05",
+    "category": "size",
+    "mode": "score",
+    "title": "这次右边才是大的",
+    "prompt": "外环仍然很会抢戏，但左右内圆这次真实谁更大？",
+    "assetType": "generator",
+    "generator": "Delboeuf",
+    "renderVariant": "right-larger",
+    "options": [
+      "左边更大",
+      "右边更大",
+      "一样大"
+    ],
+    "answer": "右边更大",
+    "explanation": "连续反向的真实差值会迫使玩家回到目标本体，而不是沿用上一题答案。",
+    "difficulty": "medium",
+    "timeLimitSec": 5,
+    "score": 120,
+    "uiCopy": {
+      "intro": "同一家族里，连续题最擅长骗惯性。",
+      "correct": "你没有让上一题的答案留在眼里。",
+      "wrong": "你被连续题节奏偷走了判断。"
+    },
+    "psychologyGoal": "继续拆解玩家刚刚建立的家族规律感。"
+  },
+  {
+    "id": "q-db-06",
+    "category": "size",
+    "mode": "score",
+    "title": "两边外环都很宽，反而更难比较",
+    "prompt": "当两侧外环都被放大后，左右内圆真实大小关系是什么？",
+    "assetType": "generator",
+    "generator": "Delboeuf",
+    "renderVariant": "both-wide",
+    "options": [
+      "左边更大",
+      "右边更大",
+      "一样大"
+    ],
+    "answer": "一样大",
+    "explanation": "双方都使用更宽外环时，玩家往往会去追逐细微差别，但内圆本身仍保持一致。",
+    "difficulty": "hard",
+    "timeLimitSec": 5,
+    "score": 130,
+    "uiCopy": {
+      "intro": "两边都很夸张时，大脑会硬找一个赢家。",
+      "correct": "你没有被“必须分出胜负”的冲动带偏。",
+      "wrong": "你为了找差异，看见了并不存在的差异。"
+    },
+    "psychologyGoal": "利用对称高强度背景诱导玩家主动过度解读。"
+  },
+  {
+    "id": "q-db-07",
+    "category": "size",
+    "mode": "score",
+    "title": "两边都贴得很近，最容易看花",
+    "prompt": "双侧外环都更贴边时，左右内圆真实谁更大？",
+    "assetType": "generator",
+    "generator": "Delboeuf",
+    "renderVariant": "both-tight",
+    "options": [
+      "左边更大",
+      "右边更大",
+      "一样大"
+    ],
+    "answer": "一样大",
+    "explanation": "当两侧都进入高贴边状态时，内圆与外环之间的边界感更弱，因此更容易凭感觉误判。",
+    "difficulty": "hard",
+    "timeLimitSec": 5,
+    "score": 130,
+    "uiCopy": {
+      "intro": "贴边越强，越要把盘子从脑子里删掉。",
+      "correct": "你在高干扰里仍然锁住了目标。",
+      "wrong": "你被双边高压的盘子效应拖走了。"
+    },
+    "psychologyGoal": "把 Delboeuf 难度推到后段峰值。"
+  },
+  {
+    "id": "q-db-08",
+    "category": "size",
+    "mode": "score",
+    "title": "分裂间距下，左边其实更大",
+    "prompt": "左右外环间距不对称时，两个内圆真实谁更大？",
+    "assetType": "generator",
+    "generator": "Delboeuf",
+    "renderVariant": "split-gap",
+    "options": [
+      "左边更大",
+      "右边更大",
+      "一样大"
+    ],
+    "answer": "左边更大",
+    "explanation": "这道 split-gap 版本同时混入真实差值和不对称边界，最容易让人误以为自己能靠气质判断出答案。",
+    "difficulty": "hard",
+    "timeLimitSec": 5,
+    "score": 140,
+    "uiCopy": {
+      "intro": "复杂结构最容易诱发“我大概懂了”的错觉。",
+      "correct": "你在混合信号里仍然抓住了左侧优势。",
+      "wrong": "你被不对称盘子结构掩盖了真实差值。"
+    },
+    "psychologyGoal": "把尺寸类推到混合干扰版本，形成高点。"
+  },
+  {
+    "id": "q-cw-01",
     "category": "parallel-direction",
     "mode": "score",
-    "title": "砖墙在偷偷倾斜",
-    "prompt": "砖块错位后，中间那几条灰线看起来歪了。它们真的歪了吗？",
+    "title": "砖墙在偷偷扭你的眼",
+    "prompt": "砖块错位后，几条灰色横线看起来像歪了。它们真实关系是什么？",
     "assetType": "generator",
     "generator": "CafeWall",
+    "renderVariant": "classic-parallel",
     "options": [
       "真的倾斜",
       "其实平行",
       "一部分平行一部分不平行"
     ],
     "answer": "其实平行",
-    "explanation": "Cafe Wall 错觉由黑白砖块错位和边缘对比引起，让水平线看起来像波浪或倾斜。",
+    "explanation": "Cafe Wall 错觉利用砖块错位和高对比边缘，让原本平行的灰线看起来像在倾斜或起伏。",
+    "difficulty": "easy",
+    "timeLimitSec": 5,
+    "score": 100,
+    "uiCopy": {
+      "intro": "别跟着砖块跑，真正要比较的是灰线。",
+      "correct": "你拆穿了砖墙制造的方向假象。",
+      "wrong": "你把局部错位误读成了整体倾斜。"
+    },
+    "psychologyGoal": "把判断从长度和大小切到方向，扩大“视觉系统处处不可靠”的感觉。"
+  },
+  {
+    "id": "q-cw-02",
+    "category": "parallel-direction",
+    "mode": "score",
+    "title": "灰缝变窄后更像在晃",
+    "prompt": "灰色分隔线变得更窄时，这些横线真实还是平行吗？",
+    "assetType": "generator",
+    "generator": "CafeWall",
+    "renderVariant": "narrow-mortar",
+    "options": [
+      "真的倾斜",
+      "其实平行",
+      "中间平行两端不平行"
+    ],
+    "answer": "其实平行",
+    "explanation": "更窄的灰缝会让明暗边界切换更频繁，从而放大你对倾斜与波动的主观感受。",
+    "difficulty": "medium",
+    "timeLimitSec": 5,
+    "score": 110,
+    "uiCopy": {
+      "intro": "细缝会更吵，不会把直线真的改歪。",
+      "correct": "你没有让高频边缘偷走方向判断。",
+      "wrong": "你的视觉系统把频繁切换脑补成了倾斜。"
+    },
+    "psychologyGoal": "放大 Cafe Wall 强度，让方向类进入更强的“明明像在动”。"
+  },
+  {
+    "id": "q-cw-03",
+    "category": "parallel-direction",
+    "mode": "score",
+    "title": "灰缝变宽，也照样会让你误会",
+    "prompt": "灰色分隔线加宽后，中间横线的真实关系是什么？",
+    "assetType": "generator",
+    "generator": "CafeWall",
+    "renderVariant": "wide-mortar",
+    "options": [
+      "真的倾斜",
+      "其实平行",
+      "只有最上面是平行"
+    ],
+    "answer": "其实平行",
+    "explanation": "即使灰缝更宽，黑白砖块的错位仍会持续扰乱局部边缘整合，平行线依旧会被看成歪斜。",
+    "difficulty": "medium",
+    "timeLimitSec": 5,
+    "score": 110,
+    "uiCopy": {
+      "intro": "错觉不是只有在最细的缝里才会生效。",
+      "correct": "你没有把宽灰缝当成真实扭曲。",
+      "wrong": "你被更显眼的层次感诱导了。"
+    },
+    "psychologyGoal": "证明方向误判来自整体排列，而不是单一细节参数。"
+  },
+  {
+    "id": "q-cw-04",
+    "category": "parallel-direction",
+    "mode": "score",
+    "title": "错位拉大后，倾斜感更有戏",
+    "prompt": "砖块左右错位更明显时，这几条灰线真实关系是什么？",
+    "assetType": "generator",
+    "generator": "CafeWall",
+    "renderVariant": "high-offset",
+    "options": [
+      "向一侧倾斜",
+      "其实平行",
+      "会在中间汇合"
+    ],
+    "answer": "其实平行",
+    "explanation": "更大的错位会增强“行在滑动”的感觉，但灰线本身依旧保持平行。",
     "difficulty": "medium",
     "timeLimitSec": 5,
     "score": 120,
     "uiCopy": {
-      "correct": "你拆穿了砖块制造的方向假象。",
-      "wrong": "砖块排列把你的局部边缘检测带偏了，平行线因此像在滑动。",
-      "intro": "如果你觉得线在扭，这正是题目想让你觉得的。"
+      "intro": "错位幅度升级了，线条结构没变。",
+      "correct": "你没让砖块节奏改写灰线事实。",
+      "wrong": "你把排布节奏看成了线条方向。"
     },
-    "psychologyGoal": "利用高对比重复图形制造更强的“明明在动/在歪”感。"
+    "psychologyGoal": "把中段的方向干扰推到更有戏剧感的版本。"
   },
   {
-    "id": "q11-zollner-dense",
+    "id": "q-cw-05",
     "category": "parallel-direction",
     "mode": "score",
-    "title": "干扰线越多，越像不平行",
-    "prompt": "这一版加入更多短斜线。两条长线的关系仍然是？",
+    "title": "错位减小后，骗法更隐蔽",
+    "prompt": "砖块错位被压低后，横线真实还是平行吗？",
     "assetType": "generator",
-    "generator": "Zollner",
+    "generator": "CafeWall",
+    "renderVariant": "low-offset",
     "options": [
-      "向外发散",
-      "向内收拢",
-      "仍然平行"
+      "真的倾斜",
+      "其实平行",
+      "只有底部平行"
     ],
-    "answer": "仍然平行",
-    "explanation": "增加干扰线数量会进一步强化方向偏移感，但主体长线并没有真的改变方向。",
+    "answer": "其实平行",
+    "explanation": "低错位版本更像“温和欺骗”，会让玩家放松警惕，但灰线仍未真的偏转。",
+    "difficulty": "medium",
+    "timeLimitSec": 5,
+    "score": 120,
+    "uiCopy": {
+      "intro": "越不明显的错觉，越容易让人掉以轻心。",
+      "correct": "你识破了低调版假动作。",
+      "wrong": "你以为温和就代表真实。"
+    },
+    "psychologyGoal": "利用轻量版错觉制造“我本来以为这题简单”的落差。"
+  },
+  {
+    "id": "q-cw-06",
+    "category": "parallel-direction",
+    "mode": "score",
+    "title": "砖块更密时，直线最容易被看弯",
+    "prompt": "砖块数量更密、节奏更碎时，这几条灰线真实关系是什么？",
+    "assetType": "generator",
+    "generator": "CafeWall",
+    "renderVariant": "dense-tiles",
+    "options": [
+      "会起伏弯曲",
+      "其实平行",
+      "两端平行中间弯"
+    ],
+    "answer": "其实平行",
+    "explanation": "高密度砖块会让局部边缘干扰更频繁，因此直线更容易被大脑误组织成波浪或斜线。",
     "difficulty": "hard",
     "timeLimitSec": 5,
     "score": 130,
     "uiCopy": {
-      "correct": "你顶住了高密度方向干扰。",
-      "wrong": "你把局部倾斜平均成了整体发散，这正是这类错觉的陷阱。",
-      "intro": "信息越多不代表越真实，可能只是更吵。"
+      "intro": "信息越密，不一定越清楚，可能只是更吵。",
+      "correct": "你在高噪音里仍然守住了平行。",
+      "wrong": "你把局部碎裂感脑补成了整体变形。"
     },
-    "psychologyGoal": "把玩家推进高噪音判断区，制造更明显的直觉崩塌。"
+    "psychologyGoal": "把方向类推进到高频干扰版本，制造强烈挫败。"
   },
   {
-    "id": "q12-cafe-wall-narrow",
+    "id": "q-cw-07",
     "category": "parallel-direction",
     "mode": "score",
-    "title": "线条明明直，却像在起伏",
-    "prompt": "更窄的砖块会让错觉更强。请判断灰线的真实关系。",
+    "title": "砖块更宽时，假倾斜更像真的",
+    "prompt": "砖块变宽后，灰色横线真实还是平行吗？",
     "assetType": "generator",
     "generator": "CafeWall",
+    "renderVariant": "wide-tiles",
     "options": [
-      "上下起伏",
-      "全部平直平行",
-      "中间弯曲两端平直"
+      "真的倾斜",
+      "其实平行",
+      "上面平行下面不平行"
     ],
-    "answer": "全部平直平行",
-    "explanation": "缩窄砖块会让局部对比更频繁地切换，从而强化你对弯曲和倾斜的主观感受。",
+    "answer": "其实平行",
+    "explanation": "更宽的砖块会让局部对比块更像大面积斜面，但这仍是背景组织带来的假象。",
+    "difficulty": "hard",
+    "timeLimitSec": 5,
+    "score": 130,
+    "uiCopy": {
+      "intro": "面积更大，不代表线条结构变了。",
+      "correct": "你没有把大块对比误认成真实歪斜。",
+      "wrong": "你被宽砖块拉出了错误的方向感。"
+    },
+    "psychologyGoal": "说明 Cafe Wall 的欺骗既能来自高频，也能来自大面积块面。"
+  },
+  {
+    "id": "q-cw-08",
+    "category": "parallel-direction",
+    "mode": "score",
+    "title": "反转黑白后，直线还是直线",
+    "prompt": "黑白砖块对调后，很多人会重新猜错。灰线真实关系是什么？",
+    "assetType": "generator",
+    "generator": "CafeWall",
+    "renderVariant": "inverted-contrast",
+    "options": [
+      "真的倾斜",
+      "其实平行",
+      "只在中间平行"
+    ],
+    "answer": "其实平行",
+    "explanation": "把明暗顺序反过来，并不会改变灰线的几何关系，但会重置玩家刚建立的视觉习惯。",
     "difficulty": "hard",
     "timeLimitSec": 5,
     "score": 140,
     "uiCopy": {
-      "correct": "你抓住了结构真相，没有被局部闪烁骗走。",
-      "wrong": "你的视觉系统在快速拼接边缘，所以直线被你脑补成了波浪。",
-      "intro": "这题会让你想放大看，但时间不会等你。"
+      "intro": "配色翻面了，几何没有。",
+      "correct": "你没有被对比反转二次骗到。",
+      "wrong": "你把黑白翻面当成了结构翻面。"
     },
-    "psychologyGoal": "在高压倒计时下放大“越想看清越容易看错”的体验。"
+    "psychologyGoal": "利用配色反转做尾段冲击，让玩家体会“连规律都可以反着骗你”。"
   },
   {
-    "id": "q13-checker-shadow-a-b",
+    "id": "q-cs-01",
     "category": "color-brightness",
     "mode": "score",
-    "title": "阴影让同色变成两色",
-    "prompt": "棋盘上的 A 与 B 方块看起来一深一浅。它们真实的明度关系是什么？",
+    "title": "阴影会把同灰说成两灰",
+    "prompt": "棋盘上的 A 和 B 看起来一深一浅。它们真实的明度关系是什么？",
     "assetType": "generator",
     "generator": "CheckerShadow",
+    "renderVariant": "classic-equal",
     "options": [
       "A 更深",
       "B 更深",
-      "两者一样"
+      "两者一样深"
     ],
-    "answer": "两者一样",
-    "explanation": "Checker Shadow 错觉说明大脑会自动扣除阴影影响，结果把相同明度的方块看成不同颜色。",
+    "answer": "两者一样深",
+    "explanation": "Checker Shadow 错觉说明大脑会自动扣除阴影影响，于是把相同明度误读成不同颜色。",
     "difficulty": "easy",
+    "timeLimitSec": 5,
+    "score": 100,
+    "uiCopy": {
+      "intro": "题目问的是方块本身，不是你脑补出来的照明。",
+      "correct": "你没有把阴影补偿误当成真实差异。",
+      "wrong": "你相信了光照叙事，而不是像素本身。"
+    },
+    "psychologyGoal": "让玩家意识到亮度判断不是读数，而是推断。"
+  },
+  {
+    "id": "q-cs-02",
+    "category": "color-brightness",
+    "mode": "score",
+    "title": "阴影更软，照样会误导",
+    "prompt": "这一版阴影边缘更柔和。A 与 B 的真实明度关系是什么？",
+    "assetType": "generator",
+    "generator": "CheckerShadow",
+    "renderVariant": "soft-shadow-equal",
+    "options": [
+      "A 更深",
+      "B 更深",
+      "两者一样深"
+    ],
+    "answer": "两者一样深",
+    "explanation": "柔和阴影不会削弱场景解释，反而会让视觉系统更自然地执行“去阴影补偿”。",
+    "difficulty": "medium",
     "timeLimitSec": 5,
     "score": 110,
     "uiCopy": {
-      "correct": "你没有把阴影补偿误当成真实差异。",
-      "wrong": "大脑自动做了“去阴影”运算，所以相同明度被你看成不同。",
-      "intro": "别相信环境光感受，题目问的是方块本身。"
+      "intro": "更自然的光感，往往更难防。",
+      "correct": "你没有被柔和光感骗到。",
+      "wrong": "你把自然阴影读成了真实明暗差。"
     },
-    "psychologyGoal": "让玩家意识到亮度判断并不是读数，而是推断。"
+    "psychologyGoal": "说明亮度错觉不依赖硬边界，柔和版本也很危险。"
   },
   {
-    "id": "q14-checker-shadow-cylinder",
+    "id": "q-cs-03",
     "category": "color-brightness",
     "mode": "score",
-    "title": "光照剧情抢走了颜色真相",
-    "prompt": "圆柱投下阴影后，两块灰色看起来不同。真实情况是？",
+    "title": "硬阴影让差异看起来更铁证如山",
+    "prompt": "阴影边界更锐利时，A 和 B 的真实明度关系是什么？",
     "assetType": "generator",
     "generator": "CheckerShadow",
+    "renderVariant": "hard-shadow-equal",
     "options": [
-      "左边更亮",
-      "右边更亮",
-      "明度相同"
+      "A 更深",
+      "B 更深",
+      "两者一样深"
     ],
-    "answer": "明度相同",
-    "explanation": "场景中的光源、遮挡和材质会让你倾向于按“现实解释”去理解图像，而不是按像素本身比较。",
+    "answer": "两者一样深",
+    "explanation": "硬阴影会让场景结构更“可信”，因此玩家更容易坚定地认为两个区域真的不同。",
+    "difficulty": "medium",
+    "timeLimitSec": 5,
+    "score": 110,
+    "uiCopy": {
+      "intro": "越像证据，越可能只是场景在演戏。",
+      "correct": "你没有被锐利边界强化信念。",
+      "wrong": "你把阴影硬边界当成了明度铁证。"
+    },
+    "psychologyGoal": "放大亮度类的“我明明看见不同”感。"
+  },
+  {
+    "id": "q-cs-04",
+    "category": "color-brightness",
+    "mode": "score",
+    "title": "这次 A 真的更深",
+    "prompt": "不要默认所有阴影题都在考“其实一样”。A 和 B 真实谁更深？",
+    "assetType": "generator",
+    "generator": "CheckerShadow",
+    "renderVariant": "left-darker",
+    "options": [
+      "A 更深",
+      "B 更深",
+      "两者一样深"
+    ],
+    "answer": "A 更深",
+    "explanation": "这题在保留棋盘与阴影结构的同时，真实把 A 做得更深，用来打断玩家对家族答案的依赖。",
     "difficulty": "medium",
     "timeLimitSec": 5,
     "score": 120,
     "uiCopy": {
-      "correct": "你从故事感里抽离出来了。",
-      "wrong": "你相信了光照叙事，于是同色块被读成了不同亮度。",
-      "intro": "这一题不是看灰度，是在对抗大脑的自动补光。"
+      "intro": "熟悉错觉之后，真差值反而更容易被忽略。",
+      "correct": "你看见了真实变暗，而不是只记住套路。",
+      "wrong": "你把“多半一样”偷懒成了答案。"
     },
-    "psychologyGoal": "制造“场景解释压倒真实输入”的惊奇感。"
+    "psychologyGoal": "用真实亮度差值打断玩家刚建立的防错觉策略。"
   },
   {
-    "id": "q15-simultaneous-contrast-bars",
+    "id": "q-cs-05",
     "category": "color-brightness",
     "mode": "score",
-    "title": "背景替颜色发言",
-    "prompt": "中间两条灰带分别放在深浅不同的背景上。它们自身的亮度关系是？",
+    "title": "这次 B 才是真的更深",
+    "prompt": "同样的阴影叙事下，A 和 B 这次真实谁更深？",
+    "assetType": "generator",
+    "generator": "CheckerShadow",
+    "renderVariant": "right-darker",
+    "options": [
+      "A 更深",
+      "B 更深",
+      "两者一样深"
+    ],
+    "answer": "B 更深",
+    "explanation": "连续相反方向的真实差值会迫使玩家重新看亮度本体，而不是沿用上一题。",
+    "difficulty": "medium",
+    "timeLimitSec": 5,
+    "score": 120,
+    "uiCopy": {
+      "intro": "上一题的答案，这题正好可能害你。",
+      "correct": "你重新比较了亮度，而不是跟着节奏跑。",
+      "wrong": "你把连续题当成了同一个答案模板。"
+    },
+    "psychologyGoal": "继续拆除亮度类中的惯性判断。"
+  },
+  {
+    "id": "q-cs-06",
+    "category": "color-brightness",
+    "mode": "score",
+    "title": "斜阴影更会诱导场景脑补",
+    "prompt": "阴影改成斜切方向后，A 与 B 的真实明度关系是什么？",
+    "assetType": "generator",
+    "generator": "CheckerShadow",
+    "renderVariant": "diagonal-shadow",
+    "options": [
+      "A 更深",
+      "B 更深",
+      "两者一样深"
+    ],
+    "answer": "两者一样深",
+    "explanation": "斜向阴影更像真实光源投射，会加强场景解释，但两块目标的明度依旧相同。",
+    "difficulty": "hard",
+    "timeLimitSec": 5,
+    "score": 130,
+    "uiCopy": {
+      "intro": "场景更像真的，不代表目标真的变了。",
+      "correct": "你没有被斜切光感带跑。",
+      "wrong": "你把斜向投影误当成了真实亮度差。"
+    },
+    "psychologyGoal": "把亮度类推进到更强的场景叙事版本。"
+  },
+  {
+    "id": "q-cs-07",
+    "category": "color-brightness",
+    "mode": "score",
+    "title": "高圆柱会让补偿做得更过头",
+    "prompt": "投影主体更高、更显眼时，A 和 B 真实谁更深？",
+    "assetType": "generator",
+    "generator": "CheckerShadow",
+    "renderVariant": "tall-cylinder",
+    "options": [
+      "A 更深",
+      "B 更深",
+      "两者一样深"
+    ],
+    "answer": "两者一样深",
+    "explanation": "更高的投影主体会强化你对“这里一定有阴影补偿”的自动运算，从而更容易忽略相同明度的事实。",
+    "difficulty": "hard",
+    "timeLimitSec": 5,
+    "score": 130,
+    "uiCopy": {
+      "intro": "主体越显眼，越容易被它带着算错。",
+      "correct": "你从强叙事里抽离出来了。",
+      "wrong": "你被“高圆柱投影”这段剧情说服了。"
+    },
+    "psychologyGoal": "把亮度判断推向后段高压版本。"
+  },
+  {
+    "id": "q-cs-08",
+    "category": "color-brightness",
+    "mode": "score",
+    "title": "短圆柱会诱发过度修正",
+    "prompt": "投影主体缩短后，很多人会反向猜错。A 与 B 真实关系是什么？",
+    "assetType": "generator",
+    "generator": "CheckerShadow",
+    "renderVariant": "short-cylinder",
+    "options": [
+      "A 更深",
+      "B 更深",
+      "两者一样深"
+    ],
+    "answer": "两者一样深",
+    "explanation": "当投影主体没那么夸张时，玩家常因怀疑“这次是不是故意不一样”而过度修正，但两者仍等明。",
+    "difficulty": "hard",
+    "timeLimitSec": 5,
+    "score": 130,
+    "uiCopy": {
+      "intro": "防被骗太用力，也会把自己带偏。",
+      "correct": "你没有因为谨慎而反向失真。",
+      "wrong": "你在修正错觉时又制造了新的差异。"
+    },
+    "psychologyGoal": "利用玩家的防御心态完成亮度类的二次反转。"
+  },
+  {
+    "id": "q-sc-01",
+    "category": "color-brightness",
+    "mode": "score",
+    "title": "背景在替灰条发言",
+    "prompt": "两条灰条分别落在深浅不同的背景上。它们自身的亮度关系是什么？",
     "assetType": "asset",
     "asset": "simultaneous-contrast-bars",
     "options": [
-      "上面更亮",
-      "下面更亮",
+      "左边更亮",
+      "右边更亮",
       "两条一样亮"
     ],
     "answer": "两条一样亮",
-    "explanation": "同时对比效应会让同样的灰色在不同背景上显得更亮或更暗，这不是灰带变了，而是背景改变了感受。",
+    "explanation": "同时对比效应会让同样的灰在不同背景里显得更亮或更暗，但灰条本身并未改变。",
     "difficulty": "medium",
     "timeLimitSec": 5,
     "score": 110,
     "uiCopy": {
+      "intro": "背景很吵，目标其实没变。",
       "correct": "你没有把环境对比错当成物体属性。",
-      "wrong": "你看到的是背景关系，不是灰带本身。",
-      "intro": "背景越抢戏，目标越容易被误读。"
+      "wrong": "你看见的是背景关系，不是灰条本身。"
     },
-    "psychologyGoal": "扩展颜色明暗类别，不把亮度错觉限制在单一棋盘范式里。"
+    "psychologyGoal": "扩展亮度类，不把“被骗”局限在棋盘范式。"
   },
   {
-    "id": "q16-identical-grays-context",
+    "id": "q-sc-02",
+    "category": "color-brightness",
+    "mode": "score",
+    "title": "浅底会让同灰像更亮",
+    "prompt": "当一条灰条放在更深底上、另一条放在更浅底上时，它们真实关系是什么？",
+    "assetType": "asset",
+    "asset": "simultaneous-contrast-bars",
+    "options": [
+      "深底那条更亮",
+      "浅底那条更亮",
+      "两条一样亮"
+    ],
+    "answer": "两条一样亮",
+    "explanation": "视觉系统会优先比较相邻对比度，所以同一灰条会在不同背景里像是拥有不同亮度。",
+    "difficulty": "medium",
+    "timeLimitSec": 5,
+    "score": 110,
+    "uiCopy": {
+      "intro": "你比较的应该是灰条，不是它周围那圈反差。",
+      "correct": "你守住了目标亮度。",
+      "wrong": "背景把你的标尺改掉了。"
+    },
+    "psychologyGoal": "让玩家感受“环境会直接改写主体观感”的不安。"
+  },
+  {
+    "id": "q-sc-03",
+    "category": "color-brightness",
+    "mode": "score",
+    "title": "高对比边界会把差异夸大",
+    "prompt": "边界反差更强时，两条灰条真实谁更亮？",
+    "assetType": "asset",
+    "asset": "simultaneous-contrast-bars",
+    "options": [
+      "左边更亮",
+      "右边更亮",
+      "两条一样亮"
+    ],
+    "answer": "两条一样亮",
+    "explanation": "边界对比越强，越容易把同一亮度主观放大成明显差异，但目标并未改变。",
+    "difficulty": "hard",
+    "timeLimitSec": 5,
+    "score": 120,
+    "uiCopy": {
+      "intro": "对比度升级了，不代表目标被改写。",
+      "correct": "你没有被强对比吓住。",
+      "wrong": "你把边界冲击读成了目标差值。"
+    },
+    "psychologyGoal": "把同时对比推到高强度版本，增加亮度类压力。"
+  },
+  {
+    "id": "q-sc-04",
+    "category": "color-brightness",
+    "mode": "score",
+    "title": "越像差很多，越可能根本没差",
+    "prompt": "请只比较两条灰条本体，不看背景叙事。它们真实关系是什么？",
+    "assetType": "asset",
+    "asset": "simultaneous-contrast-bars",
+    "options": [
+      "左边更亮",
+      "右边更亮",
+      "两条一样亮"
+    ],
+    "answer": "两条一样亮",
+    "explanation": "这类图最容易制造“明明差很多”的主观确信，但那种确信往往正是背景借来的。",
+    "difficulty": "hard",
+    "timeLimitSec": 5,
+    "score": 120,
+    "uiCopy": {
+      "intro": "当你觉得太明显时，先怀疑背景。",
+      "correct": "你识破了最典型的亮度话术。",
+      "wrong": "你被“差很多”的第一印象接管了。"
+    },
+    "psychologyGoal": "把同时对比类做成一个经典高潮点。"
+  },
+  {
+    "id": "q-ig-01",
     "category": "color-brightness",
     "mode": "score",
     "title": "同一块灰，在两边像两个人",
-    "prompt": "这两个灰块被放进不同环境后，看起来像一深一浅。真实关系是什么？",
+    "prompt": "两块灰色目标被放进不同环境后，看起来像一深一浅。真实关系是什么？",
     "assetType": "asset",
     "asset": "identical-grays-context",
     "options": [
@@ -388,23 +1569,98 @@
       "其实相同"
     ],
     "answer": "其实相同",
-    "explanation": "视觉系统并不直接读取绝对亮度，而是优先估计相对关系与照明条件，因此同灰块会被赋予不同观感。",
-    "difficulty": "hard",
+    "explanation": "视觉系统不会直接读绝对亮度，而会先估计照明与环境，因此同一块灰在不同上下文里会像两种颜色。",
+    "difficulty": "medium",
     "timeLimitSec": 5,
-    "score": 130,
+    "score": 110,
     "uiCopy": {
-      "correct": "你成功绕过了相对亮度陷阱。",
-      "wrong": "你的大脑在自动做“场景校正”，结果把同一块灰看成了两种亮度。",
-      "intro": "如果你觉得差很多，说明这题已经开始起作用了。"
+      "intro": "环境在讲故事，灰块本身没改口。",
+      "correct": "你绕过了相对亮度陷阱。",
+      "wrong": "你把场景校正后的结果当成了事实。"
     },
-    "psychologyGoal": "把“我明明看见差异”推到最强，形成亮度类高潮。"
+    "psychologyGoal": "把亮度误判升级成“同一目标像两个人”的心理落差。"
   },
   {
-    "id": "q17-duck-rabbit-pair",
+    "id": "q-ig-02",
+    "category": "color-brightness",
+    "mode": "score",
+    "title": "明暗语境一换，你也会跟着改口",
+    "prompt": "当左右环境的明暗氛围明显不同时，两块灰色目标真实关系是什么？",
+    "assetType": "asset",
+    "asset": "identical-grays-context",
+    "options": [
+      "左边更深",
+      "右边更深",
+      "其实相同"
+    ],
+    "answer": "其实相同",
+    "explanation": "上下文会重写你对“正常亮度”的基线，因此相同灰块会被强行解释成不同明暗。",
+    "difficulty": "medium",
+    "timeLimitSec": 5,
+    "score": 110,
+    "uiCopy": {
+      "intro": "别先问环境像什么，先问目标是不是同一灰。",
+      "correct": "你没有让语境重写事实。",
+      "wrong": "你被周围氛围拖走了基线。"
+    },
+    "psychologyGoal": "让玩家意识到亮度知觉本质上带着场景推理。"
+  },
+  {
+    "id": "q-ig-03",
+    "category": "color-brightness",
+    "mode": "score",
+    "title": "越像差很远，越可能是环境借来的",
+    "prompt": "请忽略背景层次，只比较两个灰块本体。它们真实关系是什么？",
+    "assetType": "asset",
+    "asset": "identical-grays-context",
+    "options": [
+      "左边更深",
+      "右边更深",
+      "其实相同"
+    ],
+    "answer": "其实相同",
+    "explanation": "这类上下文错觉之所以强，是因为大脑会主动“还原场景”，而不是老老实实比较像素值。",
+    "difficulty": "hard",
+    "timeLimitSec": 5,
+    "score": 120,
+    "uiCopy": {
+      "intro": "你眼前看到的是结果，不是原始输入。",
+      "correct": "你守住了灰块本身。",
+      "wrong": "你把大脑自动修图的结果当成了原图。"
+    },
+    "psychologyGoal": "把亮度类推到更抽象的语境层，而不是具体阴影层。"
+  },
+  {
+    "id": "q-ig-04",
+    "category": "color-brightness",
+    "mode": "score",
+    "title": "最后再确认一次：同灰还是同灰",
+    "prompt": "很多人到这里会因为太谨慎而反向猜错。两个灰块真实关系是什么？",
+    "assetType": "asset",
+    "asset": "identical-grays-context",
+    "options": [
+      "左边更深",
+      "右边更深",
+      "其实相同"
+    ],
+    "answer": "其实相同",
+    "explanation": "到了后段，玩家常因连续被反转而过度补偿，但这题依旧在提醒你：环境很会说谎，目标未必有变。",
+    "difficulty": "hard",
+    "timeLimitSec": 5,
+    "score": 120,
+    "uiCopy": {
+      "intro": "谨慎是好事，过度修正不是。",
+      "correct": "你没有因为防错觉而制造新错觉。",
+      "wrong": "你在自我校正里又被环境牵走了。"
+    },
+    "psychologyGoal": "利用玩家的疲劳与防御，完成亮度类的收束。"
+  },
+  {
+    "id": "q-dr-01",
     "category": "ambiguous-image",
     "mode": "score",
-    "title": "你只看见一种动物？还不够",
-    "prompt": "这张经典多义图像里，真正同时藏着的是哪一对形象？",
+    "title": "你先认出的是哪对动物",
+    "prompt": "这张经典多义图真正同时藏着的是哪一对形象？",
     "assetType": "asset",
     "asset": "duck-rabbit",
     "options": [
@@ -413,48 +1669,398 @@
       "鹅和海豹"
     ],
     "answer": "鸭子和兔子",
-    "explanation": "Duck-Rabbit 不是考你第一眼看见什么，而是考你能否在第一次判断之后完成视角切换。",
+    "explanation": "Duck-Rabbit 的关键不在于第一眼像什么，而在于你能否接受同一轮廓还藏着第二种解释。",
     "difficulty": "easy",
     "timeLimitSec": 5,
     "score": 90,
     "uiCopy": {
-      "correct": "你完成了从单解释到双解释的切换。",
-      "wrong": "多义图像最常骗到的不是眼睛，而是“我已经看懂了”的自信。",
-      "intro": "先看到一种不难，难的是承认还有第二种。"
+      "intro": "先看到一种不难，难的是承认还有第二种。",
+      "correct": "你抓到了这张图的双重身份。",
+      "wrong": "多义图最容易骗到的，是“我已经看懂了”的自信。"
     },
-    "psychologyGoal": "把反转从尺寸与方向转到意义层，让玩家体会认知翻面。"
+    "psychologyGoal": "把体验从几何误判切到意义翻面。"
   },
   {
-    "id": "q18-old-young-pair",
+    "id": "q-dr-02",
+    "category": "ambiguous-image",
+    "mode": "score",
+    "title": "嘴还是耳朵，取决于你怎么组织",
+    "prompt": "图中向左伸出的那一段，更可能被解释成什么？",
+    "assetType": "asset",
+    "asset": "duck-rabbit",
+    "options": [
+      "鸭嘴",
+      "兔耳",
+      "两种都能成立"
+    ],
+    "answer": "两种都能成立",
+    "explanation": "同一条轮廓既能被看成鸭嘴，也能被看成兔耳，这正是多义图像的核心。",
+    "difficulty": "easy",
+    "timeLimitSec": 5,
+    "score": 90,
+    "uiCopy": {
+      "intro": "这不是识记题，而是解释切换题。",
+      "correct": "你允许了一条线拥有两种身份。",
+      "wrong": "你把可切换结构锁死成了单一对象。"
+    },
+    "psychologyGoal": "训练玩家接受“同一局部可以服务两种整体解释”。"
+  },
+  {
+    "id": "q-dr-03",
+    "category": "ambiguous-image",
+    "mode": "score",
+    "title": "真正难的不是看见，而是切换",
+    "prompt": "如果你已经看见一只鸭子，下一步最关键的能力是什么？",
+    "assetType": "asset",
+    "asset": "duck-rabbit",
+    "options": [
+      "继续盯住鸭嘴细节",
+      "尝试切换到兔子解释",
+      "记住背景颜色"
+    ],
+    "answer": "尝试切换到兔子解释",
+    "explanation": "多义图的挑战不在初次识别，而在于能否脱离第一解释，重新组织同一输入。",
+    "difficulty": "medium",
+    "timeLimitSec": 5,
+    "score": 100,
+    "uiCopy": {
+      "intro": "这类题考的是认知松动度。",
+      "correct": "你抓住了多义图真正要测试的能力。",
+      "wrong": "你还停留在单解释模式里。"
+    },
+    "psychologyGoal": "把尾段从“看见什么”推进到“能否切换解释”。"
+  },
+  {
+    "id": "q-dr-04",
+    "category": "ambiguous-image",
+    "mode": "score",
+    "title": "第一眼稳定，不代表唯一正确",
+    "prompt": "如果你一开始只稳定看到鸭子，最合理的理解是什么？",
+    "assetType": "asset",
+    "asset": "duck-rabbit",
+    "options": [
+      "图里其实只有鸭子",
+      "图里还能切换出兔子",
+      "说明自己看错了整张图"
+    ],
+    "answer": "图里还能切换出兔子",
+    "explanation": "第一眼稳定地看到某一种解释很正常，但多义图价值就在于它允许第二解释后来进入。",
+    "difficulty": "medium",
+    "timeLimitSec": 5,
+    "score": 100,
+    "uiCopy": {
+      "intro": "第一眼不是错，锁死第一眼才危险。",
+      "correct": "你没有把首因效应当成唯一真相。",
+      "wrong": "你把先看到的解释误当成了整张图的唯一答案。"
+    },
+    "psychologyGoal": "把多义图体验与结果页的“先入为主”文案接起来。"
+  },
+  {
+    "id": "q-dr-05",
+    "category": "ambiguous-image",
+    "mode": "score",
+    "title": "这张图最容易暴露哪种倾向",
+    "prompt": "面对鸭兔图，最容易被放大的心理倾向是什么？",
+    "assetType": "asset",
+    "asset": "duck-rabbit",
+    "options": [
+      "先入为主后不愿切换",
+      "颜色记忆特别强",
+      "空间定位特别准"
+    ],
+    "answer": "先入为主后不愿切换",
+    "explanation": "多义图像最常暴露的是解释锁定倾向，而不是色彩或空间技能。",
+    "difficulty": "medium",
+    "timeLimitSec": 5,
+    "score": 100,
+    "uiCopy": {
+      "intro": "尾段开始从答题转向自我观察。",
+      "correct": "你抓到了这类图真正考验的心理变量。",
+      "wrong": "你把认知切换题理解成了普通识图题。"
+    },
+    "psychologyGoal": "为结果页的性格化解释预埋信号。"
+  },
+  {
+    "id": "q-dr-06",
+    "category": "ambiguous-image",
+    "mode": "score",
+    "title": "能切换的人，通常做对了什么",
+    "prompt": "如果一个玩家能很快在鸭子和兔子之间切换，最可能说明什么？",
+    "assetType": "asset",
+    "asset": "duck-rabbit",
+    "options": [
+      "他更愿意重组解释",
+      "他看得更远",
+      "他记忆力更强"
+    ],
+    "answer": "他更愿意重组解释",
+    "explanation": "快速切换不意味着视力更好，而意味着对同一输入保持开放重组的能力更强。",
+    "difficulty": "hard",
+    "timeLimitSec": 5,
+    "score": 110,
+    "uiCopy": {
+      "intro": "这题考的不是眼力，是认知柔韧性。",
+      "correct": "你没有把切换能力误读成一般能力。",
+      "wrong": "你把多义图结果套到了无关技能上。"
+    },
+    "psychologyGoal": "把多义图从视觉题进一步转成认知风格题。"
+  },
+  {
+    "id": "q-dr-07",
+    "category": "ambiguous-image",
+    "mode": "score",
+    "title": "同一轮廓为什么能变身",
+    "prompt": "鸭兔图最核心的机制是什么？",
+    "assetType": "asset",
+    "asset": "duck-rabbit",
+    "options": [
+      "同一线索可被组织成不同对象",
+      "颜色在不断变化",
+      "图像在轻微移动"
+    ],
+    "answer": "同一线索可被组织成不同对象",
+    "explanation": "多义图像的关键机制是知觉组织，而不是颜色变化或动态图效。",
+    "difficulty": "hard",
+    "timeLimitSec": 5,
+    "score": 110,
+    "uiCopy": {
+      "intro": "它骗你的不是眼球，而是组织方式。",
+      "correct": "你抓住了多义图的底层机制。",
+      "wrong": "你把知觉组织误解成了画面变化。"
+    },
+    "psychologyGoal": "把玩家从“我看到了什么”推进到“为什么会这样看”。"
+  },
+  {
+    "id": "q-dr-08",
+    "category": "ambiguous-image",
+    "mode": "score",
+    "title": "看懂两种解释后，真正的收获是什么",
+    "prompt": "如果你已经能稳定看出鸭子和兔子两种版本，这张图最值得带走的提醒是什么？",
+    "assetType": "asset",
+    "asset": "duck-rabbit",
+    "options": [
+      "同一输入也可能支持多种解释",
+      "第一眼永远不可信",
+      "多看几秒就一定正确"
+    ],
+    "answer": "同一输入也可能支持多种解释",
+    "explanation": "多义图最重要的提醒不是“第一眼都错”，而是同一信息可以被组织出不止一种意义。",
+    "difficulty": "hard",
+    "timeLimitSec": 5,
+    "score": 110,
+    "uiCopy": {
+      "intro": "尾段不是在否定直觉，而是在提醒你直觉不止一种。",
+      "correct": "你把这类图真正的价值说对了。",
+      "wrong": "你把多义图误读成了简单的“第一眼必错”。"
+    },
+    "psychologyGoal": "作为尾段收束题，把体验提升到意义层总结。"
+  },
+  {
+    "id": "q-oy-01",
     "category": "ambiguous-image",
     "mode": "score",
     "title": "一张脸，两种年龄",
-    "prompt": "这张多义人像同时包含哪两种人物解释？",
+    "prompt": "这张经典多义人像真正同时包含哪两种人物解释？",
     "assetType": "asset",
     "asset": "old-young-woman",
     "options": [
       "老妇人与少女",
       "母亲与孩子",
-      "侦探与小丑"
+      "侦探与演员"
     ],
     "answer": "老妇人与少女",
-    "explanation": "Old/Young Woman 错觉展示了同一组线条如何被大脑组织成完全不同的人物结构。",
+    "explanation": "Old-Young Woman 展示了同一组线条如何被组织成完全不同的年龄与脸部结构。",
+    "difficulty": "easy",
+    "timeLimitSec": 5,
+    "score": 90,
+    "uiCopy": {
+      "intro": "你看见的第一张脸，不一定是唯一的脸。",
+      "correct": "你抓到了这张图的双重身份。",
+      "wrong": "你把同一组线条锁成了单一人物。"
+    },
+    "psychologyGoal": "把尾段的意义反转从动物切到人脸，增强记忆点。"
+  },
+  {
+    "id": "q-oy-02",
+    "category": "ambiguous-image",
+    "mode": "score",
+    "title": "下巴还是鼻子，取决于你先信谁",
+    "prompt": "图中最突出的那道斜线，可能在两种解释里分别扮演什么角色？",
+    "assetType": "asset",
+    "asset": "old-young-woman",
+    "options": [
+      "少女的下巴与老妇人的鼻子",
+      "少女的耳朵与老妇人的头发",
+      "少女的围巾与老妇人的帽子"
+    ],
+    "answer": "少女的下巴与老妇人的鼻子",
+    "explanation": "同一条关键轮廓会在两种整体组织下拥有不同身份，这正是人脸多义图最迷人的地方。",
+    "difficulty": "easy",
+    "timeLimitSec": 5,
+    "score": 90,
+    "uiCopy": {
+      "intro": "局部身份会跟着整体解释一起变。",
+      "correct": "你允许同一条线在两种脸里换身份。",
+      "wrong": "你把局部特征锁死在单一人物上。"
+    },
+    "psychologyGoal": "帮助玩家理解多义图不是“多藏一个图层”，而是重组同一线索。"
+  },
+  {
+    "id": "q-oy-03",
+    "category": "ambiguous-image",
+    "mode": "score",
+    "title": "第一眼看到年轻，不代表图里没有衰老",
+    "prompt": "如果你先稳定认出少女，最合理的下一步是什么？",
+    "assetType": "asset",
+    "asset": "old-young-woman",
+    "options": [
+      "尝试切到老妇人解释",
+      "继续确认发型细节",
+      "记住背景颜色"
+    ],
+    "answer": "尝试切到老妇人解释",
+    "explanation": "这类图的关键不是证明第一眼对不对，而是能否从第一解释松开，接纳第二解释进入。",
     "difficulty": "medium",
     "timeLimitSec": 5,
     "score": 100,
     "uiCopy": {
-      "correct": "你抓到了这张图的双重身份。",
-      "wrong": "多义图像最擅长把一种解释锁死，让第二种解释迟迟进不来。",
-      "intro": "你看见的第一张脸，不一定是唯一的脸。"
+      "intro": "你要训练的不是坚持，而是切换。",
+      "correct": "你抓到了多义人像真正的挑战。",
+      "wrong": "你还停在单解释确认阶段。"
     },
-    "psychologyGoal": "在计分题尾段留下“原来我连人脸都能看反”的记忆点。"
+    "psychologyGoal": "把玩家从普通识图思路拉向认知切换思路。"
   },
   {
-    "id": "q19-analysis-duck-first",
+    "id": "q-oy-04",
+    "category": "ambiguous-image",
+    "mode": "score",
+    "title": "这张图最容易放大哪种偏差",
+    "prompt": "面对老妇人与少女图，最容易暴露的偏差是什么？",
+    "assetType": "asset",
+    "asset": "old-young-woman",
+    "options": [
+      "先认定一种解释后不愿重组",
+      "色彩敏感度不足",
+      "长度判断不准确"
+    ],
+    "answer": "先认定一种解释后不愿重组",
+    "explanation": "这类图最常放大的不是感官精度，而是解释锁定与首因效应。",
+    "difficulty": "medium",
+    "timeLimitSec": 5,
+    "score": 100,
+    "uiCopy": {
+      "intro": "尾段开始不只是问你看见什么，而是问你怎么决定。",
+      "correct": "你抓住了这张图真正测到的东西。",
+      "wrong": "你把认知切换题误当成了基础感官测试。"
+    },
+    "psychologyGoal": "为结果页人格化文案提供第二个多义图信号。"
+  },
+  {
+    "id": "q-oy-05",
+    "category": "ambiguous-image",
+    "mode": "score",
+    "title": "同一张脸，为什么会看成两代人",
+    "prompt": "这张图之所以成立，最关键的原因是什么？",
+    "assetType": "asset",
+    "asset": "old-young-woman",
+    "options": [
+      "同一轮廓可被组织成不同人物结构",
+      "画面在快速闪动",
+      "图里藏了透明叠层"
+    ],
+    "answer": "同一轮廓可被组织成不同人物结构",
+    "explanation": "多义人像靠的是知觉组织差异，而不是动态图效或额外叠层。",
+    "difficulty": "medium",
+    "timeLimitSec": 5,
+    "score": 100,
+    "uiCopy": {
+      "intro": "真正变化的不是图，而是你的组织方式。",
+      "correct": "你看到了这类图的底层机制。",
+      "wrong": "你把知觉重组误会成了画面技术。"
+    },
+    "psychologyGoal": "把多义人像从“好玩”上升到“可解释”的层面。"
+  },
+  {
+    "id": "q-oy-06",
+    "category": "ambiguous-image",
+    "mode": "score",
+    "title": "切换得快的人，通常不是眼神更好",
+    "prompt": "如果有人能迅速在老妇人与少女之间切换，更可能说明什么？",
+    "assetType": "asset",
+    "asset": "old-young-woman",
+    "options": [
+      "他更愿意重组解释",
+      "他看脸更准",
+      "他记忆更持久"
+    ],
+    "answer": "他更愿意重组解释",
+    "explanation": "快速切换更多反映认知弹性，而不是传统意义上的“看得更准”。",
+    "difficulty": "hard",
+    "timeLimitSec": 5,
+    "score": 110,
+    "uiCopy": {
+      "intro": "这题考的是心智弹性，不是视力分数。",
+      "correct": "你没有把切换能力误读成一般能力。",
+      "wrong": "你把认知柔韧性误套成了无关天赋。"
+    },
+    "psychologyGoal": "把尾段结果自然引向“认知风格”解释。"
+  },
+  {
+    "id": "q-oy-07",
+    "category": "ambiguous-image",
+    "mode": "score",
+    "title": "越笃定自己只看到一种，越容易错过另一种",
+    "prompt": "如果玩家非常确定图里只有一种人物，这最可能说明什么？",
+    "assetType": "asset",
+    "asset": "old-young-woman",
+    "options": [
+      "他暂时被单一解释锁住了",
+      "图像本身没有第二解释",
+      "他记错了题目要求"
+    ],
+    "answer": "他暂时被单一解释锁住了",
+    "explanation": "多义图并不会因为你很自信就只剩一种解释，真正发生的是你被第一组织方式暂时锁住了。",
+    "difficulty": "hard",
+    "timeLimitSec": 5,
+    "score": 110,
+    "uiCopy": {
+      "intro": "笃定不等于全面。",
+      "correct": "你看到了“解释锁定”而不是把问题怪给图。",
+      "wrong": "你把自己的锁定误判成了图像的限制。"
+    },
+    "psychologyGoal": "把玩家的尾段体验直接映射到结果页的“先入为主”主题。"
+  },
+  {
+    "id": "q-oy-08",
+    "category": "ambiguous-image",
+    "mode": "score",
+    "title": "看懂两种脸后，最值得记住什么",
+    "prompt": "如果你已经能看见两种人物，这张图最想提醒你的是什么？",
+    "assetType": "asset",
+    "asset": "old-young-woman",
+    "options": [
+      "同一输入也能支持多种人物组织",
+      "第一眼一定不可信",
+      "多看久一点就一定更客观"
+    ],
+    "answer": "同一输入也能支持多种人物组织",
+    "explanation": "这类图真正的提醒不是否定第一眼，而是提醒你：同一信息可能容纳多种合理组织。",
+    "difficulty": "hard",
+    "timeLimitSec": 5,
+    "score": 110,
+    "uiCopy": {
+      "intro": "最后一题不是打脸直觉，而是给直觉留出第二扇门。",
+      "correct": "你把多义图的价值总结对了。",
+      "wrong": "你把它误读成了简单的“第一眼必错”。"
+    },
+    "psychologyGoal": "作为尾段收束题，把多义人像提升到整体主题总结。"
+  },
+  {
+    "id": "q-an-01",
     "category": "ambiguous-image",
     "mode": "analysis",
-    "title": "分析题：你的大脑先下注哪一边？",
-    "prompt": "看到这张鸭兔图时，你第一眼先稳定成了哪一种解释？",
+    "title": "分析题：鸭兔里你先下注哪一边？",
+    "prompt": "看到这张鸭兔图时，你第一眼更稳定地认成了什么？",
     "assetType": "asset",
     "asset": "duck-rabbit",
     "options": [
@@ -463,23 +2069,48 @@
       "我来回切换，第一眼不稳定"
     ],
     "answer": "我先看到鸭子",
-    "explanation": "这题没有标准对错，重点是记录你在模糊信息出现时更容易先锁定哪种解释。",
+    "explanation": "这题不用于计分，而是记录你在模糊信息出现时更容易先锁定哪种解释。",
     "difficulty": "medium",
     "timeLimitSec": 5,
     "score": 0,
     "uiCopy": {
-      "correct": "已记录你的第一视角偏好。",
-      "wrong": "分析题不判对错，只记录你先把世界解释成什么。",
-      "intro": "这不是计分题，这是在追踪你的第一反应偏好。"
+      "intro": "这不是对错题，而是在记录你的第一解释偏好。",
+      "correct": "已记录你的第一视角倾向。",
+      "wrong": "分析题不追求标准答案，只追踪你先相信什么。"
     },
-    "psychologyGoal": "为结果页提供“你是先入为主型还是切换型”的人格化素材。"
+    "psychologyGoal": "为结果页提供“先入为主型还是切换型”的人格化素材。"
   },
   {
-    "id": "q20-analysis-old-young-first",
+    "id": "q-an-02",
     "category": "ambiguous-image",
     "mode": "analysis",
-    "title": "分析题：你先抓住年轻，还是先抓住衰老？",
-    "prompt": "看到老妇人与少女图时，你第一眼更稳定地认成了谁？",
+    "title": "分析题：如果要你主动切换，你会怎么做？",
+    "prompt": "面对鸭兔图时，你更像下面哪种玩家？",
+    "assetType": "asset",
+    "asset": "duck-rabbit",
+    "options": [
+      "我会主动找第二种解释",
+      "我会先守住第一眼判断",
+      "我要来回确认很多次才敢切换"
+    ],
+    "answer": "我会主动找第二种解释",
+    "explanation": "这道分析题用来补充你的认知切换风格，而不是判定谁更聪明。",
+    "difficulty": "medium",
+    "timeLimitSec": 5,
+    "score": 0,
+    "uiCopy": {
+      "intro": "结果页需要的不只是你看见什么，还包括你怎么切换。",
+      "correct": "已记录你的切换策略。",
+      "wrong": "分析题只记录风格，不区分对错。"
+    },
+    "psychologyGoal": "补充玩家面对多义图时的主动切换倾向。"
+  },
+  {
+    "id": "q-an-03",
+    "category": "ambiguous-image",
+    "mode": "analysis",
+    "title": "分析题：老妇人与少女里，你先锁住谁？",
+    "prompt": "看到这张人像时，你第一眼更稳定地认成了谁？",
     "assetType": "asset",
     "asset": "old-young-woman",
     "options": [
@@ -488,15 +2119,40 @@
       "两种解释几乎同时出现"
     ],
     "answer": "我先看到少女",
-    "explanation": "这题用于补充你的解释偏好。它更像一面镜子，而不是一道判断题。",
+    "explanation": "这题用于记录你在人脸多义图里的首因偏好，不计入总分。",
     "difficulty": "medium",
     "timeLimitSec": 5,
     "score": 0,
     "uiCopy": {
-      "correct": "已记录你的面孔解释倾向。",
-      "wrong": "分析题不计分，它只把你的第一视角存下来。",
-      "intro": "最后一题不考你准不准，只看你先相信什么。"
+      "intro": "这不是计分题，而是结果页的人格侧写信号。",
+      "correct": "已记录你的第一脸部解释。",
+      "wrong": "分析题不判对错，只记录你先相信哪张脸。"
     },
-    "psychologyGoal": "补充多义图像维度，为结果页的人格文案提供第二个信号。"
+    "psychologyGoal": "补充人脸多义图维度的首因效应信息。"
+  },
+  {
+    "id": "q-an-04",
+    "category": "ambiguous-image",
+    "mode": "analysis",
+    "title": "分析题：你更像先确认，还是先重组？",
+    "prompt": "面对老妇人与少女图时，你更接近哪种状态？",
+    "assetType": "asset",
+    "asset": "old-young-woman",
+    "options": [
+      "先确认第一眼，再慢慢切换",
+      "会主动寻找第二张脸",
+      "两种解释会来回争夺注意力"
+    ],
+    "answer": "会主动寻找第二张脸",
+    "explanation": "这道分析题用于捕捉你在多义人像中的组织策略，帮助结果页生成更贴近体验的总结。",
+    "difficulty": "medium",
+    "timeLimitSec": 5,
+    "score": 0,
+    "uiCopy": {
+      "intro": "最后一题不问你准不准，只问你怎么组织。",
+      "correct": "已记录你的重组策略。",
+      "wrong": "分析题只存风格信号，不计成败。"
+    },
+    "psychologyGoal": "补充结果页对玩家解释策略的描述维度。"
   }
 ]
